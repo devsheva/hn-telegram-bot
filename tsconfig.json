@@ -1,3 +1,15 @@
 {
-  "exclude": ["node_modules/**"]
+  "compilerOptions": {
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "outDir": "dist",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }
