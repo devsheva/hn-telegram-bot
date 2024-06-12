@@ -5,10 +5,12 @@
     "outDir": "dist",
     "strict": true,
     "noEmit": true,
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
