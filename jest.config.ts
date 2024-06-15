@@ -5,6 +5,7 @@ const jestConfig: JestConfigWithTsJest = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   modulePaths: [compilerOptions.baseUrl],
+  testMatch: ['**/__tests__/**/*.test.ts'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {}),
 }
 
