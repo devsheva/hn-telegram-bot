@@ -6,14 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "npx tsc",
-    "dev": "npx dotenvx run -- npx tsx watch index.ts --env-file=.env",
+    "dev": "npx dotenvx run -- npx tsx watch index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mateo Sheshi",
   "license": "ISC",
   "dependencies": {
     "@dotenvx/dotenvx": "^0.44.1",
-    "@types/node": "^20.14.2",
     "@types/ramda": "^0.30.0",
     "axios": "^1.7.2",
     "ramda": "^0.30.1",

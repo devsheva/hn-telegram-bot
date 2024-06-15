@@ -5,8 +5,8 @@ HackerNews Telegram Bot
 
 ### Development
 
-To develop in local just run `npm run watch` that will start nodemon to achieve hot-reloading, and also `dotenvx` under the hood.
+To develop in local just run `npm run dev` that will start tsx with watch mode, and also `dotenvx` under the hood.
 
 ### Build
-```npm build```
+```npm run build```
 
