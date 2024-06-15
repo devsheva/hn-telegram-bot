@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "npx dotenvx run -- npx tsx watch src/index.ts",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "author": "Mateo Sheshi",
   "license": "ISC",
