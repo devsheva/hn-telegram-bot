@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "outDir": "dist",
     "strict": true,
     "noEmit": true,
     "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["./*"],
-      "@api/*": ["./api/*"]
+      "@/*": ["src/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": ["./node_modules/@types", "src/types"]
   },
-  "include": ["**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
