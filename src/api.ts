@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { HN_API } from './config'
-import { Item } from './types/item'
+import { Item, ItemResponse, ItemsResponse } from './types/item'
 
 export const getTopStories = async (): Promise<number[]> => {
   const { data } = await axios({
@@ -11,7 +11,7 @@ export const getTopStories = async (): Promise<number[]> => {
 }
 
 export const getItem = async (id: number): Promise<Item> => {
-  const { data } = await axios({
+  const { data } = await axios<ItemResponse>({
     url: `${HN_API}/item/${id}.json`,
   })
 

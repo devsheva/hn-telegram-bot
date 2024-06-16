@@ -15,3 +15,6 @@ export type Item = {
   parts
   descendants: number
 }
+
+export type ItemsResponse = Item[]
+export type ItemResponse = Item
