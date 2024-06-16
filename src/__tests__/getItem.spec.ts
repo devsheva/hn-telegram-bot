@@ -33,5 +33,11 @@ describe('getItem', () => {
     expect(item).toHaveProperty('url')
   })
 
-  it('should handle errors gracefully', async () => {})
+  it('should handle not found item', async () => {
+    mockedAxios.mockResolvedValueOnce({
+      data: null,
+    })
+    const item = await getItem(-1)
+    expect(item).toBeNull()
+  })
 })
