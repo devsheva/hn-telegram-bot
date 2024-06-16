@@ -15,6 +15,4 @@ describe('getTopStories', () => {
     expect(result).toBeInstanceOf(Array)
     expect(result).toHaveLength(500)
   })
-
-  it('should handle errors gracefully', () => {})
 })
