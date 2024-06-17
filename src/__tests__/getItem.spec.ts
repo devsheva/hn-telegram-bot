@@ -1,24 +1,20 @@
 import { getItem } from '@/api'
-import axios from 'axios'
-
-jest.mock('axios')
-
-const mockedAxios = axios as jest.MockedFunction<typeof axios>
 
 describe('getItem', () => {
   it('should return an item', async () => {
-    mockedAxios.mockResolvedValue({
-      data: {
-        by: 'dhouston',
-        descendants: 71,
-        id: 8863,
-        score: 104,
-        time: 1175714200,
-        title: 'My YC app: Dropbox - Throw away your USB drive',
-        type: 'story',
-        url: 'http://www.getdropbox.com/u/2/screencast.html',
-      },
-    })
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: () =>
+        Promise.resolve({
+          by: 'dhouston',
+          descendants: 71,
+          id: 8863,
+          score: 104,
+          time: 1175714200,
+          title: 'My YC app: Dropbox - Throw away your USB drive',
+          type: 'story',
+          url: 'http://www.getdropbox.com/u/2/screencast.html',
+        }),
+    } as any)
 
     const item = await getItem(8863)
 
@@ -34,9 +30,9 @@ describe('getItem', () => {
   })
 
   it('should handle not found item', async () => {
-    mockedAxios.mockResolvedValueOnce({
-      data: null,
-    })
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: () => Promise.resolve(null),
+    } as any)
     const item = await getItem(-1)
     expect(item).toBeNull()
   })
