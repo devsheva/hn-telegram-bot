@@ -1,19 +1,18 @@
-import axios from 'axios'
 import { HN_API } from './config'
 import { Item, ItemResponse, ItemsResponse } from './types/item'
 
 export const getTopStories = async (): Promise<number[]> => {
-  const { data } = await axios({
-    url: `${HN_API}/topstories.json`,
-  })
+  const data = await fetch(`${HN_API}/topstories.json`).then((res) =>
+    res.json()
+  )
 
   return data
 }
 
-export const getItem = async (id: number): Promise<Item> => {
-  const { data } = await axios<ItemResponse>({
-    url: `${HN_API}/item/${id}.json`,
-  })
+export const getItem = async (id: number): Promise<Item | any> => {
+  const data = await fetch(`${HN_API}/item/${id}.json`).then((res) =>
+    res.json()
+  )
 
   return data
 }
