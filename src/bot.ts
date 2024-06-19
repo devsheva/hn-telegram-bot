@@ -1,9 +1,14 @@
 import { Bot } from 'grammy'
 
-const bot = new Bot(process.env.BOT_TOKEN)
+const bot = new Bot(process.env.BOT_TOKEN!)
 
-// Reply to any message with "Hi there!".
-bot.on('message', (ctx) => ctx.reply('Hi there!'))
+bot.command('help', (ctx) => ctx.reply('This is a help text'))
+
+await bot.api.setMyCommands([
+  { command: 'start', description: 'Start the bot' },
+  { command: 'setup', description: 'Setup your preferences' },
+  { command: 'help', description: 'Display help text' },
+])
 
 bot.start()
 
