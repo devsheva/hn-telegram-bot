@@ -9,7 +9,7 @@ export const getTopStories = async (): Promise<number[]> => {
   return data
 }
 
-export const getItem = async (id: number): Promise<Item | any> => {
+export const getItem = async (id: number): Promise<Item | null> => {
   const data = await fetch(`${HN_API}/item/${id}.json`).then((res) =>
     res.json()
   )
