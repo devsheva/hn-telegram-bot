@@ -2,11 +2,11 @@
   "name": "hn-telegram-bot",
   "version": "1.0.0",
   "description": "HackerNews Telegram Bot",
-  "main": "index.js",
+  "main": "bot.js",
   "type": "module",
   "scripts": {
     "build": "npx tsc --project tsconfig.build.json",
-    "dev": "npx dotenvx run -- npx tsx watch src/index.ts",
+    "dev": "npx dotenvx run -- npx tsx watch src/bot.ts",
     "test": "jest --watch"
   },
   "author": "Mateo Sheshi",
