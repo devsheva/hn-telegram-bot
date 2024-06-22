@@ -1,5 +1,5 @@
 import { HN_API } from './config'
-import { Item, ItemResponse, ItemsResponse } from './types/item'
+import { Item } from './types/item'
 
 export const getTopStories = async (): Promise<number[]> => {
   const data = await fetch(`${HN_API}/topstories.json`).then((res) =>
