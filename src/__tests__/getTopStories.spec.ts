@@ -11,7 +11,7 @@ describe('getTopStories', () => {
     } as any)
 
     const result = await getTopStories()
-    expect(result).toBeInstanceOf(Array)
+    expect(result).toBeInstanceOf(Array<number>)
     expect(result).toHaveLength(500)
   })
 })
