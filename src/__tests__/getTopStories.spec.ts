@@ -1,5 +1,6 @@
 import { getTopStories } from '@/api'
 import { faker } from '@faker-js/faker'
+import { jest } from '@jest/globals'
 
 describe('getTopStories', () => {
   it('should return an array of top stories', async () => {

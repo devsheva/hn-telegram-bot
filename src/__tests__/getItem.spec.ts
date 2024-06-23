@@ -1,4 +1,5 @@
 import { getItem } from '@/api'
+import { jest } from '@jest/globals'
 
 describe('getItem', () => {
   it('should return an item', async () => {

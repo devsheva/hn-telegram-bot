@@ -1,7 +1,8 @@
 import { Bot } from 'grammy'
-import setupComposer from './preference/setup'
+import setup from './preference/setup'
+import { BOT_TOKEN } from './config'
 
-const bot = new Bot(process.env.BOT_TOKEN!)
+const bot = new Bot(BOT_TOKEN!)
 
 bot.command('help', (ctx) =>
   ctx.reply('Bot is under construction. Please wait for the next update.')
@@ -13,7 +14,6 @@ await bot.api.setMyCommands([
   { command: 'help', description: 'Display help text' },
 ])
 
-bot.use(setupComposer)
-bot.start()
+bot.use(setup)
 
 export default bot
