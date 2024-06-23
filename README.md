@@ -22,3 +22,6 @@ Do it like this way
 import {jest} from '@jest/globals'
 ```
 
+### Tips
+
+Use `setMyCommands` on deployment, or configure it directly with @BotFather
