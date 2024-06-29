@@ -18,7 +18,7 @@ Put all tests under this [folder](src/__tests__) and run `npm test`, which will 
 
 **Important!**  
 
-You should always import jest or it will raise `ReferenceError: jest is not defined.  
+You should always import jest when you use the global object or it will raise `ReferenceError: jest is not defined.  
 
 Example
 

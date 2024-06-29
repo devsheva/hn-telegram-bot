@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import * as R from 'ramda'
 import bot from '@/bot'
 

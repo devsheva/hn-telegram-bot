@@ -1,6 +1,5 @@
-import { PreferencesContext, SessionData } from '@/types/sessionData'
-import { freeStorage } from '@grammyjs/storage-free'
-import { Composer, session } from 'grammy'
+import { PreferencesContext } from '@/types/sessionData'
+import { Composer } from 'grammy'
 
 const composer = new Composer<PreferencesContext>()
 
