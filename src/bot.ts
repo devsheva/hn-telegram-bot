@@ -3,6 +3,7 @@ import setup from './preference/setup'
 import { BOT_TOKEN } from './config'
 import { PreferencesContext } from './types/sessionData'
 import { getSessionAdapter } from './utils'
+import { conversations } from '@grammyjs/conversations'
 
 const bot = new Bot<PreferencesContext>(BOT_TOKEN!)
 
@@ -16,6 +17,13 @@ bot.use(
     storage: getSessionAdapter(bot.token!),
   }),
 )
+
+bot.use(conversations())
+// Always exit any conversation upon /cancel
+bot.command('cancel', async (ctx) => {
+  await ctx.conversation.exit()
+  await ctx.reply('Leaving.')
+})
 
 bot.use(setup)
 

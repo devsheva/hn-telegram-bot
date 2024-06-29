@@ -1,9 +1,22 @@
-import { PreferencesContext } from '@/types/sessionData'
+import { ConversationContext, PreferencesContext } from '@/types/sessionData'
+import { createConversation } from '@grammyjs/conversations'
 import { Composer } from 'grammy'
 
 const composer = new Composer<PreferencesContext>()
 
-composer.command('setup', (ctx) => ctx.reply('Setting up your preferences...'))
+const greeting = async (
+  conversation: ConversationContext,
+  ctx: PreferencesContext,
+) => {
+  await ctx.reply('What is your name?')
+  const nameCtx = await conversation.waitFor(':text')
+  ctx.reply(`Hello, ${nameCtx.msg.text}!`)
+}
+
+composer.use(createConversation(greeting))
+composer.command('setup', async (ctx) => {
+  await ctx.conversation.enter('greeting')
+})
 
 composer.on('message', (ctx) =>
   ctx.reply('Please use the /setup command to setup your preferences.'),
