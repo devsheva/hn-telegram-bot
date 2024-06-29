@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "build": "npx tsc --project tsconfig.build.json",
-    "dev": "npx dotenvx run -- npx esrun --watch=src/*.ts src/bot.ts",
+    "dev": "npx dotenvx run -- npx esrun --watch=src/*.ts src/index.ts",
     "test": "dotenvx run -f .env.test -- node --experimental-vm-modules node_modules/.bin/jest --watch"
   },
   "author": "Mateo Sheshi",
   "license": "ISC",
   "dependencies": {
     "@dotenvx/dotenvx": "^0.44.1",
+    "@grammyjs/storage-free": "^2.4.2",
     "grammy": "^1.25.0",
     "ramda": "^0.30.1"
   },
