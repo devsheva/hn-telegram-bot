@@ -18,6 +18,8 @@ composer.command('setup', async (ctx) => {
   await ctx.conversation.enter('greeting')
 })
 
+// TODO: add a command to clear preferences
+
 composer.on('message', (ctx) =>
   ctx.reply('Please use the /setup command to setup your preferences.'),
 )

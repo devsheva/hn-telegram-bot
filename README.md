@@ -30,3 +30,4 @@ import {jest} from '@jest/globals'
 ### Tips
 
 Use `setMyCommands` on deployment, or configure it directly with @BotFather
+This project is made by mainly following BDD principles, so you should stick to it, you won't regret.
