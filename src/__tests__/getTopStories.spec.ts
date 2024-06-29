@@ -1,5 +1,6 @@
 import { getTopStories } from '@/api'
 import { faker } from '@faker-js/faker'
+import { jest } from '@jest/globals'
 
 describe('getTopStories', () => {
   it('should return an array of top stories', async () => {
@@ -11,7 +12,7 @@ describe('getTopStories', () => {
     } as any)
 
     const result = await getTopStories()
-    expect(result).toBeInstanceOf(Array)
+    expect(result).toBeInstanceOf(Array<number>)
     expect(result).toHaveLength(500)
   })
 })

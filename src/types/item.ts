@@ -7,14 +7,11 @@ export type Item = {
   text: string
   dead: boolean
   parent: number
-  poll
-  kids
+  poll: any // fix this
+  kids: any // fix this
   url: string
   score: number
   title: string
-  parts
+  parts: any // fix this
   descendants: number
 }
-
-export type ItemsResponse = Item[]
-export type ItemResponse = Item

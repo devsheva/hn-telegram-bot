@@ -1,17 +1,17 @@
 import { HN_API } from './config'
-import { Item, ItemResponse, ItemsResponse } from './types/item'
+import { Item } from './types/item'
 
 export const getTopStories = async (): Promise<number[]> => {
-  const data = await fetch(`${HN_API}/topstories.json`).then((res) =>
+  const data: number[] = await fetch(`${HN_API}/topstories.json`).then((res) =>
     res.json()
   )
 
   return data
 }
 
-export const getItem = async (id: number): Promise<Item | any> => {
-  const data = await fetch(`${HN_API}/item/${id}.json`).then((res) =>
-    res.json()
+export const getItem = async (id: number): Promise<Item | null> => {
+  const data: Item | null = await fetch(`${HN_API}/item/${id}.json`).then(
+    (res) => res.json()
   )
 
   return data

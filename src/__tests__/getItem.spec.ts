@@ -1,4 +1,5 @@
 import { getItem } from '@/api'
+import { jest } from '@jest/globals'
 
 describe('getItem', () => {
   it('should return an item', async () => {
@@ -18,6 +19,7 @@ describe('getItem', () => {
 
     const item = await getItem(8863)
 
+    expect(item).toBeInstanceOf(Object)
     expect(item).toHaveProperty('by')
     expect(item).toHaveProperty('descendants')
     expect(item).toHaveProperty('id')

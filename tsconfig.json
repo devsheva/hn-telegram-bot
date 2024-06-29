@@ -1,16 +1,19 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "baseUrl": ".",
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "outDir": "dist",
     "strict": true,
     "noEmit": true,
+    "allowJs": true,
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@bot/*": ["src/bot/*"]
     },
     "typeRoots": ["./node_modules/@types", "src/types"]
   },
