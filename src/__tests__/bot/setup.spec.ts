@@ -15,7 +15,7 @@ const extractProp =
     R.prop(prop, request)
 
 beforeAll(async () => {
-  bot.api.config.use((prev, method, payload) => {
+  bot.api.config.use((_, method, payload) => {
     outgoingRequests.push({ method, payload })
     return { ok: true, result: {} } as any
   })
@@ -65,4 +65,8 @@ describe('commands', () => {
     const payload = R.pipe(R.head, extractProp('payload'))(outgoingRequests)
     expect(payload).toHaveProperty('text', 'Setting up your preferences...')
   })
+})
+
+describe('persist user preferences', () => {
+  it('responds to user preferences', async () => {})
 })
