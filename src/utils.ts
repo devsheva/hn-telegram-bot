@@ -3,12 +3,9 @@ import { MemorySessionStorage } from 'grammy'
 import * as R from 'ramda'
 import { SessionData } from './types/sessionData'
 
-export const getSessionAdapter = () =>
+export const getSessionAdapter = (token?: string) =>
   R.ifElse(
     R.equals('test'),
-    R.always(ramAdapter),
-    R.always(freeStorageAdapter),
+    R.always(new MemorySessionStorage<SessionData>()),
+    R.always(freeStorage<SessionData>(token!)),
   )(process.env.NODE_ENV!)
-
-const ramAdapter = (...args: any) => new MemorySessionStorage(args)
-const freeStorageAdapter = () => freeStorage<SessionData>
