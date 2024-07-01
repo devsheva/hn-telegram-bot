@@ -2,36 +2,34 @@ import { ConversationContext, PreferencesContext } from '@/types/sessionData'
 import { createConversation } from '@grammyjs/conversations'
 import { Composer } from 'grammy'
 import * as R from 'ramda'
+
 const composer = new Composer<PreferencesContext>()
 
-const printPreferences = async (ctx: PreferencesContext) => {
-  const preferences = ctx.session.preferences
-  if (R.isEmpty(preferences)) {
-    await ctx.reply('No preferences set.')
-  } else {
-    await ctx.reply(`Your preferences are: ${R.join(',')(preferences)}`)
-  }
-}
-
-const greeting = async (
+const preferencesBuilder = async (
   conversation: ConversationContext,
   ctx: PreferencesContext,
 ) => {
   const inputPreferences = new Set<string>()
 
-  do {
-    await printPreferences(ctx)
+  while (R.T()) {
     await ctx.reply('Type your preference. Use /cancel to exit.')
-    const preferenceCtx = await conversation.waitFor(':text')
-    inputPreferences.add(preferenceCtx.msg.text)
-  } while (!ctx.hasCommand('cancel'))
+    const {
+      msg: { text },
+    } = await conversation.waitFor(':text')
 
-  ctx.session.preferences = Array.from(inputPreferences)
+    R.when(R.equals('/cancel'), async () => {
+      conversation.session.preferences = Array.from(inputPreferences)
+      await ctx.reply('Leaving...')
+      return
+    })(text)
+
+    inputPreferences.add(text)
+  }
 }
 
-composer.use(createConversation(greeting))
+composer.use(createConversation(preferencesBuilder, 'preferences'))
 composer.command('setup', async (ctx) => {
-  await ctx.conversation.enter('greeting')
+  await ctx.conversation.enter('preferences')
 })
 
 // TODO: add a command to clear preferences

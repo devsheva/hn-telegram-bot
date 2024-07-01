@@ -19,11 +19,6 @@ bot.use(
 )
 
 bot.use(conversations())
-// Always exit any conversation upon /cancel
-bot.command('cancel', async (ctx) => {
-  await ctx.conversation.exit()
-  await ctx.reply('Leaving.')
-})
 
 bot.use(setup)
 

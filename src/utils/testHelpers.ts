@@ -1,22 +1,16 @@
+import setup from '@/preference/setup'
 import { PreferencesContext, SessionData } from '@/types/sessionData'
 import { faker } from '@faker-js/faker'
+import { conversations } from '@grammyjs/conversations'
 import {
-  Conversation,
-  ConversationFlavor,
-  conversations,
-  createConversation,
-} from '@grammyjs/conversations'
-import {
-  Api,
   Bot,
-  Context,
+  Composer,
   MemorySessionStorage,
+  Middleware,
   RawApi,
-  SessionFlavor,
   session,
 } from 'grammy'
 import { ApiResponse, Chat, Update, User } from 'grammy/types'
-import * as R from 'ramda'
 
 interface ApiCall<M extends keyof RawApi = keyof RawApi> {
   method: M
@@ -47,18 +41,6 @@ export const from: User = {
   is_bot: false,
 }
 
-export const slashStart: Update = {
-  update_id: faker.number.int(),
-  message: {
-    message_id: faker.number.int(),
-    date: faker.date.anytime().getTime(),
-    chat,
-    from,
-    text: '/start',
-    entities: [{ type: 'bot_command', offset: 0, length: '/start'.length }],
-  },
-}
-
 export const slashSetup: Update = {
   update_id: 1,
   message: {
@@ -71,76 +53,53 @@ export const slashSetup: Update = {
   },
 }
 
-export const generateHandleUpdate = (text: string): Update => {
-  return {
-    update_id: faker.number.int(),
-    message: {
-      message_id: faker.number.int(),
-      date: faker.date.anytime().getTime(),
-      chat: {
-        id: faker.number.int(),
-        first_name: 'Test',
-        last_name: 'User',
-        type: 'private',
-      },
-      from: {
-        id: faker.number.int(),
-        first_name: 'Test',
-        last_name: 'User',
-        is_bot: false,
-      },
-      text,
-      entities: [{ type: 'bot_command', offset: 0, length: 6 }],
-    },
-  }
+export const slashCancel: Update = {
+  update_id: 2,
+  message: {
+    message_id: 2,
+    date: faker.date.anytime().getTime(),
+    chat,
+    from,
+    text: '/cancel',
+    entities: [{ type: 'bot_command', offset: 0, length: '/cancel'.length }],
+  },
 }
 
-export const testConversation = async <T>(
-  builder: (
-    conversation: Conversation<PreferencesContext>,
-    ctx: PreferencesContext,
-  ) => T,
+export const testSetupConversation = async (
   update: Update | Update[] = [],
   result: ApiCall | ApiCall[] = [],
+  mw: Middleware<PreferencesContext> = new Composer(),
 ) => {
-  const updates = R.is(Array, update) ? update : [update]
-  const results = R.is(Array, result) ? result : [result]
+  const updates = Array.isArray(update) ? update : [update]
+  const results = Array.isArray(result) ? result : [result]
 
-  console.log('updates', updates)
-  console.log('results', results)
   const bot = new Bot<PreferencesContext>('dummy', { botInfo })
-  bot.api.config.use((_prev, method) => {
-    console.log('APICall', method)
-    return Promise.resolve({
-      ok: true,
-      result: {} as any,
-    })
-  })
 
-  let t: T | undefined
-  const wrapper = async (
-    conversation: Conversation<PreferencesContext>,
-    ctx: PreferencesContext,
-  ) => {
-    t = builder(conversation, ctx)
-  }
+  let storageAdapter: MemorySessionStorage<SessionData>
 
   bot.use(
     session({
-      initial: (): SessionData => ({
-        preferences: [],
-      }),
+      initial: (): SessionData => ({ preferences: [] }),
+      storage: (() => {
+        storageAdapter = new MemorySessionStorage()
+        return storageAdapter
+      })(),
     }),
     conversations(),
-    createConversation(wrapper),
   )
 
-  bot.command('start', async (ctx) => ctx.conversation.enter('wrapper'))
-  await bot.handleUpdate(slashStart)
+  bot.api.config.use(() => {
+    return Promise.resolve({ ok: true, result: {} as any })
+  })
 
+  bot.use(mw)
+
+  await bot.handleUpdate(slashSetup)
   for (const update of updates) {
     await bot.handleUpdate(update)
   }
 
-  return t
+  await bot.handleUpdate(slashCancel)
+
+  return storageAdapter
 }
