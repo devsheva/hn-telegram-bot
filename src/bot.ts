@@ -16,9 +16,8 @@ bot.use(
     initial: () => ({ preferences: [] }),
     storage: getSessionAdapter(bot.token!),
   }),
+  conversations(),
 )
-
-bot.use(conversations())
 
 bot.use(setup)
 
