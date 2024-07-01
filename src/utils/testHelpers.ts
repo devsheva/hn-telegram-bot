@@ -1,4 +1,3 @@
-import setup from '@/preference/setup'
 import { PreferencesContext, SessionData } from '@/types/sessionData'
 import { faker } from '@faker-js/faker'
 import { conversations } from '@grammyjs/conversations'
@@ -88,7 +87,21 @@ export const testSetupConversation = async (
     conversations(),
   )
 
-  bot.api.config.use(() => {
+  bot.api.config.use((_prev, _method) => {
+    // TODO: not working yet
+    // const { result } = results.splice(
+    //   results.findIndex((res) => res.method === method),
+    //   1,
+    // )[0]
+
+    // return Promise.resolve(
+    //   typeof result === 'object' && result !== null && 'ok' in result
+    //     ? result
+    //     : {
+    //         ok: true,
+    //         result: result as any,
+    //       },
+    // )
     return Promise.resolve({ ok: true, result: {} as any })
   })
 
