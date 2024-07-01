@@ -10,6 +10,7 @@ import {
   session,
 } from 'grammy'
 import { ApiResponse, Chat, Update, User } from 'grammy/types'
+import * as R from 'ramda'
 
 interface ApiCall<M extends keyof RawApi = keyof RawApi> {
   method: M
@@ -40,29 +41,21 @@ export const from: User = {
   is_bot: false,
 }
 
-export const slashSetup: Update = {
+type AvailableCommands = 'setup' | 'reset' | 'list' | 'cancel'
+
+export const slashCommand = (command: AvailableCommands): Update => ({
   update_id: 1,
   message: {
     message_id: 1,
     date: faker.date.anytime().getTime(),
     chat,
     from,
-    text: '/setup',
-    entities: [{ type: 'bot_command', offset: 0, length: '/setup'.length }],
+    text: R.concat('/', command),
+    entities: [
+      { type: 'bot_command', offset: 0, length: R.inc(command.length) },
+    ],
   },
-}
-
-export const slashCancel: Update = {
-  update_id: 2,
-  message: {
-    message_id: 2,
-    date: faker.date.anytime().getTime(),
-    chat,
-    from,
-    text: '/cancel',
-    entities: [{ type: 'bot_command', offset: 0, length: '/cancel'.length }],
-  },
-}
+})
 
 export const testSetupConversation = async (
   update: Update | Update[] = [],
@@ -107,12 +100,12 @@ export const testSetupConversation = async (
 
   bot.use(mw)
 
-  await bot.handleUpdate(slashSetup)
+  await bot.handleUpdate(slashCommand('setup'))
   for (const update of updates) {
     await bot.handleUpdate(update)
   }
 
-  await bot.handleUpdate(slashCancel)
+  await bot.handleUpdate(slashCommand('cancel'))
 
   return storageAdapter
 }

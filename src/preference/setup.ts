@@ -32,10 +32,14 @@ composer.command('setup', async (ctx) => {
 })
 
 composer.command('reset', (ctx) => {
+  console.log('reset entered')
   ctx.session.preferences = []
   ctx.reply('Preferences reset.')
 })
 
+// composer.command('list', (ctx) =>
+//   ctx.reply(R.join('\n', ctx.session.preferences)),
+// )
 composer.on('message', (ctx) => {
   ctx.reply('Please use the /setup command to setup your preferences.')
 })

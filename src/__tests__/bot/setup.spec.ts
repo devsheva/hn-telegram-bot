@@ -4,8 +4,7 @@ import {
   botInfo,
   chat,
   from,
-  slashCancel,
-  slashSetup,
+  slashCommand,
   testSetupConversation,
 } from '@/utils/testHelpers'
 import { conversations } from '@grammyjs/conversations'
@@ -115,18 +114,9 @@ describe('reset', () => {
       }),
     )
 
-    await bot.handleUpdate(slashSetup)
-    await bot.handleUpdate({
-      update_id: 1,
-      message: {
-        message_id: 1,
-        date: Date.now(),
-        chat,
-        from,
-        text: 'test_preference',
-      },
-    })
-    await bot.handleUpdate(slashCancel)
+    await bot.handleUpdate(slashCommand('setup'))
+    await bot.handleUpdate(slashCommand('reset'))
+    await bot.handleUpdate(slashCommand('cancel'))
 
     const preferences = storageAdapter.read(
       R.toString(R.prop('id', chat)),
