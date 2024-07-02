@@ -1,9 +1,8 @@
 import { getItem } from '@/api'
-import { jest } from '@jest/globals'
 
 describe('getItem', () => {
   it('should return an item', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    vi.spyOn(global, 'fetch').mockResolvedValue({
       json: () =>
         Promise.resolve({
           by: 'dhouston',
@@ -32,7 +31,7 @@ describe('getItem', () => {
   })
 
   it('should handle not found item', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    vi.spyOn(global, 'fetch').mockResolvedValue({
       json: () => Promise.resolve(null),
     } as any)
     const item = await getItem(-1)
