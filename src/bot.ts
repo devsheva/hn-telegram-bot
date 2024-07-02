@@ -1,9 +1,7 @@
-import { Bot, session } from 'grammy'
+import { Bot } from 'grammy'
 import setup from './preference/setup'
 import { BOT_TOKEN } from './config'
 import { PreferencesContext } from './types/sessionData'
-import { getSessionAdapter } from './utils'
-import { conversations } from '@grammyjs/conversations'
 
 const bot = new Bot<PreferencesContext>(BOT_TOKEN!)
 

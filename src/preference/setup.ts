@@ -47,7 +47,14 @@ composer.command('reset', (ctx) => {
 })
 
 composer.command('list', (ctx) =>
-  ctx.reply(R.join('\n', ctx.session.preferences)),
+  ctx.reply(
+    R.ifElse(
+      R.isEmpty,
+      R.always('No preferences set.'),
+
+      R.join('\n'),
+    )(ctx.session.preferences),
+  ),
 )
 composer.on('message', (ctx) => {
   ctx.reply('Please use the /setup command to setup your preferences.')

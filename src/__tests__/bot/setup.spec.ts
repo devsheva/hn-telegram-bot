@@ -1,14 +1,13 @@
-import { PreferencesContext, SessionData } from '@/types/sessionData'
+import { SessionData } from '@/types/sessionData'
 
 import {
-  botInfo,
   chat,
   from,
   slashCommand,
   testSetupConversation,
 } from '@/utils/testHelpers'
-import { conversations } from '@grammyjs/conversations'
-import { Bot, MemorySessionStorage, session } from 'grammy'
+
+import { MemorySessionStorage } from 'grammy'
 
 import * as R from 'ramda'
 
@@ -22,6 +21,10 @@ vi.mock('@/utils', () => ({
 }))
 
 import setup from '@/preference/setup'
+
+beforeEach(() => {
+  vi.resetAllMocks()
+})
 
 describe('setup', () => {
   it('saves preferences', async () => {
@@ -48,9 +51,10 @@ describe('setup', () => {
           },
         },
       ],
+      [],
       setup,
     )
-    const preferences = storageAdapter.read(
+    const preferences = storageAdapter!.read(
       R.toString(R.prop('id', chat)),
     )?.preferences
 
@@ -82,10 +86,11 @@ describe('setup', () => {
           },
         },
       ],
+      [],
       setup,
     )
 
-    const preferences = storageAdapter.read(
+    const preferences = storageAdapter!.read(
       R.toString(R.prop('id', chat)),
     )?.preferences
 
@@ -97,38 +102,32 @@ describe('setup', () => {
 
 describe('reset', () => {
   it('clears preferences', async () => {
-    const bot = new Bot<PreferencesContext>('dummy', { botInfo })
-
-    bot.use(setup)
-
-    bot.api.config.use(() =>
-      Promise.resolve({
-        ok: true,
-        result: {} as any,
-      }),
+    await testSetupConversation(
+      [
+        {
+          update_id: 1,
+          message: {
+            message_id: 1,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'test_preference',
+          },
+        },
+        {
+          update_id: 2,
+          message: {
+            message_id: 2,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'some_other_preference',
+          },
+        },
+      ],
+      slashCommand('reset'),
+      setup,
     )
-
-    await bot.handleUpdate(slashCommand('setup'))
-    await bot.handleUpdate(slashCommand('reset'))
-    await bot.handleUpdate(slashCommand('cancel'))
-
-    const preferences = storageAdapter!.read(
-      R.toString(R.prop('id', chat)),
-    )?.preferences
-
-    expect(preferences).toHaveLength(1)
-
-    await bot.handleUpdate({
-      update_id: 1,
-      message: {
-        message_id: 1,
-        date: Date.now(),
-        chat,
-        from,
-        text: '/reset',
-        entities: [{ type: 'bot_command', offset: 0, length: '/reset'.length }],
-      },
-    })
 
     const updatedPreferences = storageAdapter!.read(
       R.toString(R.prop('id', chat)),
@@ -138,45 +137,34 @@ describe('reset', () => {
   })
 })
 
-/*
 describe('list', () => {
-  beforeEach(async () => {
-    outgoingRequests = []
-    bot.api.config.use((_, method, payload) => {
-      outgoingRequests.push({ method, payload })
-      return Promise.resolve({ ok: true, result: {} as any })
-    })
-
-    bot.botInfo = botInfo
-
-    await bot.init()
-  })
-
   it('lists preferences', async () => {
-    await bot.handleUpdate(slashCommand('setup'))
-    await bot.handleUpdate({
-      update_id: 1,
-      message: {
-        message_id: 1,
-        date: Date.now(),
-        chat,
-        from,
-        text: 'test_preference',
-      },
-    })
-
-    await bot.handleUpdate({
-      update_id: 1,
-      message: {
-        message_id: 1,
-        date: Date.now(),
-        chat,
-        from,
-        text: 'some_other_preference',
-      },
-    })
-
-    await bot.handleUpdate(slashCommand('list'))
+    const outgoingRequests = await testSetupConversation(
+      [
+        {
+          update_id: 1,
+          message: {
+            message_id: 1,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'test_preference',
+          },
+        },
+        {
+          update_id: 2,
+          message: {
+            message_id: 2,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'some_other_preference',
+          },
+        },
+      ],
+      slashCommand('list'),
+      setup,
+    )
 
     const listRequest = R.last(outgoingRequests)
 
@@ -188,13 +176,15 @@ describe('list', () => {
   })
 
   it('does not list preferences if there are none', async () => {
-    await bot.handleUpdate(slashCommand('list'))
+    const outgoingRequests = await testSetupConversation(
+      [],
+      slashCommand('list'),
+      setup,
+    )
 
     const listRequest = R.last(outgoingRequests)
 
     const payload = R.prop('payload', listRequest!)
-    expect(payload).toHaveProperty('text', '')
+    expect(payload).toHaveProperty('text', 'No preferences set.')
   })
 })
-
-*/

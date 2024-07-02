@@ -1,4 +1,3 @@
-import setup from '@/preference/setup'
 import { PreferencesContext, SessionData } from '@/types/sessionData'
 import { getSessionAdapter } from '@/utils'
 import { faker } from '@faker-js/faker'
@@ -61,9 +60,14 @@ export const slashCommand = (command: AvailableCommands): Update => ({
 
 export const testSetupConversation = async (
   update: Update | Update[] = [],
+  afterCancel: Update | Update[] = [],
   mw: Middleware<PreferencesContext> = new Composer(),
 ) => {
   const updates = Array.isArray(update) ? update : [update]
+  const afterCancelUpdates = Array.isArray(afterCancel)
+    ? afterCancel
+    : [afterCancel]
+
   const results: Array<{
     method: string
     payload: any
@@ -84,6 +88,10 @@ export const testSetupConversation = async (
   }
 
   await bot.handleUpdate(slashCommand('cancel'))
+
+  for (const update of afterCancelUpdates) {
+    await bot.handleUpdate(update)
+  }
 
   return results
 }
