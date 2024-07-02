@@ -1,4 +1,6 @@
+import setup from '@/preference/setup'
 import { PreferencesContext, SessionData } from '@/types/sessionData'
+import { getSessionAdapter } from '@/utils'
 import { faker } from '@faker-js/faker'
 import { conversations } from '@grammyjs/conversations'
 import {
@@ -12,7 +14,7 @@ import {
 import { ApiResponse, Chat, Update, User } from 'grammy/types'
 import * as R from 'ramda'
 
-interface ApiCall<M extends keyof RawApi = keyof RawApi> {
+export interface ApiCall<M extends keyof RawApi = keyof RawApi> {
   method: M
   result: Awaited<ReturnType<RawApi[M]>> | ApiResponse<ApiCall>
 }
@@ -59,42 +61,18 @@ export const slashCommand = (command: AvailableCommands): Update => ({
 
 export const testSetupConversation = async (
   update: Update | Update[] = [],
-  result: ApiCall | ApiCall[] = [],
   mw: Middleware<PreferencesContext> = new Composer(),
 ) => {
   const updates = Array.isArray(update) ? update : [update]
-  const results = Array.isArray(result) ? result : [result]
+  const results: Array<{
+    method: string
+    payload: any
+  }> = []
 
   const bot = new Bot<PreferencesContext>('dummy', { botInfo })
 
-  let storageAdapter: MemorySessionStorage<SessionData>
-
-  bot.use(
-    session({
-      initial: (): SessionData => ({ preferences: [] }),
-      storage: (() => {
-        storageAdapter = new MemorySessionStorage()
-        return storageAdapter
-      })(),
-    }),
-    conversations(),
-  )
-
-  bot.api.config.use((_prev, _method) => {
-    // TODO: not working yet
-    // const { result } = results.splice(
-    //   results.findIndex((res) => res.method === method),
-    //   1,
-    // )[0]
-
-    // return Promise.resolve(
-    //   typeof result === 'object' && result !== null && 'ok' in result
-    //     ? result
-    //     : {
-    //         ok: true,
-    //         result: result as any,
-    //       },
-    // )
+  bot.api.config.use((_prev, method, payload) => {
+    results.push({ method, payload })
     return Promise.resolve({ ok: true, result: {} as any })
   })
 
@@ -107,5 +85,5 @@ export const testSetupConversation = async (
 
   await bot.handleUpdate(slashCommand('cancel'))
 
-  return storageAdapter
+  return results
 }
