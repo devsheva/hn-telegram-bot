@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "npx tsc --project tsconfig.build.json",
-    "dev": "npx dotenvx run -- npx esrun --watch=src/*.ts src/index.ts",
+    "dev": "npx dotenvx run -- npx esrun --watch=src/*.ts src/bot.ts",
     "test": "dotenvx run -f .env.test -- node --experimental-vm-modules node_modules/.bin/jest --watch"
   },
   "author": "Mateo Sheshi",

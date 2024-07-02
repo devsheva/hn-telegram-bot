@@ -23,4 +23,4 @@ bot.use(setup)
 
 bot.catch((err) => console.error(err))
 
-export default bot
+bot.start()
