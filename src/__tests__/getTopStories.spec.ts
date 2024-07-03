@@ -1,12 +1,12 @@
-import { getTopStories } from '@/api'
-import { faker } from '@faker-js/faker'
+import { faker } from '@dev_deps'
+import { getTopStories } from '@/api.ts'
 
 describe('getTopStories', () => {
   it('should return an array of top stories', async () => {
     vi.spyOn(global, 'fetch').mockResolvedValueOnce({
       json: () =>
         Promise.resolve(
-          faker.helpers.multiple<Number>(faker.number.int, { count: 500 }),
+          faker.helpers.multiple<number>(faker.number.int, { count: 500 }),
         ),
     } as any)
 

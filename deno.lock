@@ -8,6 +8,7 @@
       "npm:@grammyjs/conversations@^1.2.0": "npm:@grammyjs/conversations@1.2.0_grammy@1.26.0",
       "npm:@grammyjs/storage-free@^2.4.2": "npm:@grammyjs/storage-free@2.4.2",
       "npm:@trivago/prettier-plugin-sort-imports@^4.3.0": "npm:@trivago/prettier-plugin-sort-imports@4.3.0_prettier@3.3.2",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@types/node-fetch@^2.6.11": "npm:@types/node-fetch@2.6.11",
       "npm:@types/ramda@^0.30.0": "npm:@types/ramda@0.30.0",
       "npm:esrun@^3.2.26": "npm:esrun@3.2.26",
@@ -1725,6 +1726,8 @@
     "https://x.nest.land/ramda@0.27.2/mod.ts": "https://arweave.net/au_pjpA2ORYleJ5ybnZwyw70bhzMajq8jy_f1TbhYWo/mod.ts"
   },
   "remote": {
+    "https://esm.sh/@faker-js/faker@v8.4.0": "3b580236f3f8c85a7b2b589e685a265367d4d548add82207dfc9fba6a50df32e",
+    "https://esm.sh/v135/@faker-js/faker@8.4.0/denonext/faker.mjs": "6d41425710d5f98197ac4842005814ca5375aaa0f57a504b3e138a4a5e1efa02",
     "https://nlx6tduqgy4rmjlytzzg45tqzmhpi3q4zrvdvpepf7p5knxbmfva.arweave.net/au_pjpA2ORYleJ5ybnZwyw70bhzMajq8jy_f1TbhYWo/mod.ts": "14262bdcea26c261f2f6490e733b792af9d3ae3582a4d09ca5bab0479b48ca40",
     "https://nlx6tduqgy4rmjlytzzg45tqzmhpi3q4zrvdvpepf7p5knxbmfva.arweave.net/au_pjpA2ORYleJ5ybnZwyw70bhzMajq8jy_f1TbhYWo/source/F.js": "cf0f5fdb08048909e49bb6f222f6e2f92db8d4dc0dd24900864eaf69c3746e3d",
     "https://nlx6tduqgy4rmjlytzzg45tqzmhpi3q4zrvdvpepf7p5knxbmfva.arweave.net/au_pjpA2ORYleJ5ybnZwyw70bhzMajq8jy_f1TbhYWo/source/T.js": "f96ac2cdaeedf374fb932a4ec368f0566143f0c2d028919976c41c6ee53c0515",
@@ -2072,7 +2075,6 @@
     "packageJson": {
       "dependencies": [
         "npm:@dotenvx/dotenvx@^1.5.0",
-        "npm:@faker-js/faker@^8.4.1",
         "npm:@grammyjs/conversations@^1.2.0",
         "npm:@grammyjs/storage-free@^2.4.2",
         "npm:@trivago/prettier-plugin-sort-imports@^4.3.0",

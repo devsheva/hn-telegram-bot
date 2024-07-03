@@ -3,6 +3,7 @@
     "@/": "./src/",
     "@bot/": "./src/bot/",
     "@deps": "./deps.ts",
+    "@dev_deps": "./dev_deps.ts",
     "@std/dotenv": "jsr:@std/dotenv@^0.224.2"
   },
   "fmt": {
@@ -15,6 +16,7 @@
     "dev": "deno run --watch --allow-read --allow-net --allow-env  src/bot.ts",
     "test": "deno test"
   },
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "lib": ["deno.window", "DOM", "DOM.Iterable", "ESNext"],
     "strict": true,
