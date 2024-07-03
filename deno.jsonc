@@ -10,7 +10,14 @@
     "lineWidth": 80,
     "include": ["src/**/*.ts"],
     "semiColons": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "proseWrap": "preserve",
+        "exclude": [
+            "./node_modules/",
+            "./out/",
+            "./package-lock.json",
+            "./test/cov_profile"
+        ]
   },
   "tasks": {
     "dev": "deno run --watch --allow-read --allow-net --allow-env  src/bot.ts",

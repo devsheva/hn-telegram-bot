@@ -1,9 +1,7 @@
 import { getSessionAdapter } from '@/utils.ts'
-import { conversations, createConversation } from '@grammyjs/conversations'
-import { Composer, session } from 'grammy'
 
 import { ConversationContext, PreferencesContext } from '@/types/sessionData.ts'
-import { R } from '@deps'
+import { Composer, conversations, createConversation, R, session } from '@deps'
 
 const composer = new Composer<PreferencesContext>()
 

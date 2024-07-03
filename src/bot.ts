@@ -1,7 +1,7 @@
-import { Bot } from 'grammy'
 import setup from './preference/setup.ts'
 import { BOT_TOKEN } from './config.ts'
 import { PreferencesContext } from './types/sessionData.ts'
+import { Bot } from '@deps'
 
 const bot = new Bot<PreferencesContext>(BOT_TOKEN!)
 

@@ -1,5 +1,4 @@
-import { Conversation, ConversationFlavor } from '@grammyjs/conversations'
-import { Context, SessionFlavor } from 'grammy'
+import { Context, SessionFlavor } from '@deps'
 
 export interface SessionData {
   preferences: string[]
