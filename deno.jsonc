@@ -1,0 +1,24 @@
+{
+  "imports": {
+    "@/": "./src/",
+    "@bot/": "./src/bot/",
+    "@std/dotenv": "jsr:@std/dotenv@^0.224.2"
+  },
+  "fmt": {
+    "lineWidth": 80,
+    "include": ["src/**/*.ts"],
+    "semiColons": false,
+    "singleQuote": true
+  },
+  "tasks": {
+    "dev": "deno run --watch --allow-read --allow-net --allow-env  src/bot.ts",
+    "test": "deno test"
+  },
+  "compilerOptions": {
+    "lib": ["deno.window", "DOM", "DOM.Iterable", "ESNext"],
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "types": ["vitest/globals"]
+  }
+}

@@ -1,8 +1,8 @@
-import { ConversationContext, PreferencesContext } from '@/types/sessionData'
-import { getSessionAdapter } from '@/utils'
+import { getSessionAdapter } from '@/utils.ts'
 import { conversations, createConversation } from '@grammyjs/conversations'
 import { Composer, session } from 'grammy'
 import * as R from 'ramda'
+import { ConversationContext, PreferencesContext } from '@/types/sessionData.ts'
 
 const composer = new Composer<PreferencesContext>()
 
@@ -31,7 +31,7 @@ const preferencesBuilder = async (
 composer.use(
   session({
     initial: () => ({ preferences: [] }),
-    storage: getSessionAdapter(process.env.BOT_TOKEN!),
+    storage: getSessionAdapter(''),
   }),
   conversations(),
   createConversation(preferencesBuilder, 'preferences'),
@@ -51,11 +51,9 @@ composer.command('list', (ctx) =>
     R.ifElse(
       R.isEmpty,
       R.always('No preferences set.'),
-
       R.join('\n'),
     )(ctx.session.preferences),
-  ),
-)
+  ))
 composer.on('message', (ctx) => {
   ctx.reply('Please use the /setup command to setup your preferences.')
 })
