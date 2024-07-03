@@ -1,0 +1,1 @@
+export * as R from "https://x.nest.land/ramda@0.27.2/mod.ts"
