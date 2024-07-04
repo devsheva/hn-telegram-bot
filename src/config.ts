@@ -5,7 +5,6 @@ import { parseArgs } from '@std/cli'
 type EnvKeys = 'BOT_TOKEN' | 'DENO_ENV'
 
 const isTest = parseArgs(Deno.args).test
-
 const envPath = R.ifElse(
     R.equals(true),
     R.always('.env.test'),
