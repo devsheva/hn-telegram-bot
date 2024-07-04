@@ -1,34 +1,42 @@
-import { SessionData } from '@/types/sessionData'
-
+import { MemorySessionStorage, R } from '@deps'
+import {
+  afterAll,
+  afterEach,
+  assertEquals,
+  beforeEach,
+  describe,
+  it,
+} from '@dev_deps'
+import { SessionData } from '@/types/sessionData.ts'
 import {
   chat,
   from,
   slashCommand,
   testSetupConversation,
-} from '@/utils/testHelpers'
+} from '@/utils/testHelpers.ts'
 
-import { MemorySessionStorage } from 'grammy'
+let storageAdapter: MemorySessionStorage<SessionData> | undefined
 
-import * as R from 'ramda'
-
-var storageAdapter!: MemorySessionStorage<SessionData> | undefined
-
-vi.mock('@/utils', () => ({
-  getSessionAdapter: vi.fn(() => {
-    storageAdapter = new MemorySessionStorage()
-    return storageAdapter
-  }),
-}))
-
-import setup from '@/preference/setup'
+const storageAdapterFn = () => {
+  storageAdapter = new MemorySessionStorage<SessionData>()
+  return storageAdapter
+}
 
 beforeEach(() => {
-  vi.resetAllMocks()
+  storageAdapter = undefined
 })
+
+// TODO: Remove this once we have a better way to wait for the event loop to clear
+afterAll(async () => {
+  await new Promise((r) => setTimeout(r, 0))
+})
+
+import setup from '@/preference/setup.ts'
 
 describe('setup', () => {
   it('saves preferences', async () => {
     await testSetupConversation(
+      storageAdapterFn,
       [
         {
           update_id: 1,
@@ -54,16 +62,18 @@ describe('setup', () => {
       [],
       setup,
     )
+
     const preferences = storageAdapter!.read(
       R.toString(R.prop('id', chat)),
     )?.preferences
 
-    expect(preferences).toHaveLength(2)
-    expect(preferences).toEqual(['test_preference', 'some_other_preference'])
+    assertEquals(preferences!.length, 2)
+    assertEquals(preferences, ['test_preference', 'some_other_preference'])
   })
 
   it('does not save duplicate preferences', async () => {
     await testSetupConversation(
+      storageAdapterFn,
       [
         {
           update_id: 1,
@@ -94,15 +104,15 @@ describe('setup', () => {
       R.toString(R.prop('id', chat)),
     )?.preferences
 
-    expect(preferences).toHaveLength(1)
-
-    expect(preferences).toEqual(['test_preference'])
+    assertEquals(preferences!.length, 1)
+    assertEquals(preferences, ['test_preference'])
   })
 })
 
 describe('reset', () => {
   it('clears preferences', async () => {
     await testSetupConversation(
+      storageAdapterFn,
       [
         {
           update_id: 1,
@@ -133,13 +143,14 @@ describe('reset', () => {
       R.toString(R.prop('id', chat)),
     )?.preferences
 
-    expect(updatedPreferences).toHaveLength(0)
+    assertEquals(updatedPreferences, [])
   })
 })
 
 describe('list', () => {
   it('lists preferences', async () => {
     const outgoingRequests = await testSetupConversation(
+      storageAdapterFn,
       [
         {
           update_id: 1,
@@ -169,14 +180,12 @@ describe('list', () => {
     const listRequest = R.last(outgoingRequests)
 
     const payload = R.prop('payload', listRequest!)
-    expect(payload).toHaveProperty(
-      'text',
-      'test_preference\nsome_other_preference',
-    )
+    assertEquals(payload.text, 'test_preference\nsome_other_preference')
   })
 
   it('does not list preferences if there are none', async () => {
     const outgoingRequests = await testSetupConversation(
+      storageAdapterFn,
       [],
       slashCommand('list'),
       setup,
@@ -185,6 +194,6 @@ describe('list', () => {
     const listRequest = R.last(outgoingRequests)
 
     const payload = R.prop('payload', listRequest!)
-    expect(payload).toHaveProperty('text', 'No preferences set.')
+    assertEquals(payload.text, 'No preferences set.')
   })
 })

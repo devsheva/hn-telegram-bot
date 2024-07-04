@@ -1,17 +1,19 @@
-import { PreferencesContext, SessionData } from '@/types/sessionData'
-import { getSessionAdapter } from '@/utils'
-import { faker } from '@faker-js/faker'
-import { conversations } from '@grammyjs/conversations'
 import {
+  ApiResponse,
   Bot,
+  Chat,
   Composer,
+  conversations,
   MemorySessionStorage,
   Middleware,
+  R,
   RawApi,
   session,
-} from 'grammy'
-import { ApiResponse, Chat, Update, User } from 'grammy/types'
-import * as R from 'ramda'
+  Update,
+  User,
+} from '@deps'
+import { faker } from '@dev_deps'
+import { PreferencesContext, SessionData } from '@/types/sessionData.ts'
 
 export interface ApiCall<M extends keyof RawApi = keyof RawApi> {
   method: M
@@ -59,6 +61,7 @@ export const slashCommand = (command: AvailableCommands): Update => ({
 })
 
 export const testSetupConversation = async (
+  storageAdapter: () => MemorySessionStorage<SessionData>,
   update: Update | Update[] = [],
   afterCancel: Update | Update[] = [],
   mw: Middleware<PreferencesContext> = new Composer(),
@@ -79,6 +82,14 @@ export const testSetupConversation = async (
     results.push({ method, payload })
     return Promise.resolve({ ok: true, result: {} as any })
   })
+
+  bot.use(
+    session({
+      initial: (): SessionData => ({ preferences: [] }),
+      storage: storageAdapter(),
+    }),
+    conversations(),
+  )
 
   bot.use(mw)
 
