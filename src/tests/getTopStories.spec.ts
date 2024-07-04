@@ -17,7 +17,6 @@ describe('getTopStories', () => {
         ),
     } as any)
 
-    // Stubbing globalThis.fetch directly with a function that returns the fake response
     using _fetchStub = stub(globalThis, 'fetch', () => fakeResponse)
 
     const result = await getTopStories()

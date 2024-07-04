@@ -1,4 +1,4 @@
-import { Context, SessionFlavor } from '@deps'
+import { Context, Conversation, ConversationFlavor, SessionFlavor } from '@deps'
 
 export interface SessionData {
   preferences: string[]
