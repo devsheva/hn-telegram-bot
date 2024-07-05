@@ -2,7 +2,7 @@ import { load } from '@std/dotenv'
 import { R } from '@deps'
 import { parseArgs } from '@std/cli'
 
-type EnvKeys = 'BOT_TOKEN' | 'DENO_ENV'
+type EnvKeys = 'BOT_TOKEN' | 'APP_ENV'
 
 const isTest = parseArgs(Deno.args).test
 const envPath = R.ifElse(
@@ -16,5 +16,5 @@ const env = await load({
 }) as Record<EnvKeys, string>
 
 export const HN_API = 'https://hacker-news.firebaseio.com/v0/'
-export const BOT_TOKEN = env.BOT_TOKEN
-export const DENO_ENV = env.DENO_ENV
+export const BOT_TOKEN = env.BOT_TOKEN || Deno.env.get('BOT_TOKEN')
+export const APP_ENV = env.APP_ENV || Deno.env.get('APP_ENV')
