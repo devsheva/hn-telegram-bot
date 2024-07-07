@@ -5,7 +5,7 @@ export const getTopStories = async (): Promise<TopStories> => {
   const data: TopStories = await fetch(`${config.HN_API}/topstories.json`).then(
     (
       res,
-    ) => res.json()
+    ) => res.json(),
   )
 
   storiesSchema.parse(data)
