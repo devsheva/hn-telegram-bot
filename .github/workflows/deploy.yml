@@ -17,14 +17,14 @@ jobs:
 
     steps:
       - name: Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: denoland/setup-deno@main
         with:
           deno-version: v1.x
 
-      # - name: Cache Dependencies
-      #   run: deno cache src/bot.ts
+      - name: Cache Dependencies
+        run: deno cache src/bot.ts
 
       - name: Run Tests
         run: deno task test
