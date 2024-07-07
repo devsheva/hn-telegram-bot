@@ -33,6 +33,10 @@ jobs:
     name: Coverage
     runs-on: ubuntu-latest
 
+    env:
+      APP_ENV: test
+      BOT_TOKEN: dummy
+
     steps:
       - name: Setup repo
         uses: actions/checkout@v3
