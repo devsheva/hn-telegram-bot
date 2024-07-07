@@ -1,6 +1,7 @@
 # hn-telegram-bot
 
-[![CodeFactor](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot/badge)](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot)
+[![CodeFactor](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot/badge)](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot)  
+
 HackerNews Telegram Bot
 
 ## Usage
