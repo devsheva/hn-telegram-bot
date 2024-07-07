@@ -31,5 +31,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "hn-telegram-bot"
-          entrypoint: "bot.ts"
-          root: "./src"
+          entrypoint: "src/bot.ts"
+          root: "."
