@@ -1,15 +1,41 @@
 name: Deploy
 on:
-  push: 
+  push:
     branches: develop
 
   pull_request:
     branches: master
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: test
+      BOT_TOKEN: dummy
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      # - name: Cache Dependencies
+      #   run: deno cache src/bot.ts
+
+      - name: Run Tests
+        run: deno task test
+
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
+    environment:
+      name: ${{github.ref_name}}
 
     permissions:
       id-token: write # Needed for auth with Deno Deploy
@@ -24,11 +50,12 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Test step
-        run: "deno task test"
-
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
+        env:
+          BOT_TOKEN: ${{secrets.BOT_TOKEN}}
+          GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY}}
+          APP_ENV: ${{vars.APP_ENV}}
         with:
           project: "hn-telegram-bot"
           entrypoint: "src/bot.ts"
