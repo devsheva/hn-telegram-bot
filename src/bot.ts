@@ -3,7 +3,7 @@ import { BOT_TOKEN } from './config.ts'
 
 import { Bot, conversations, session } from '@deps'
 import { getSessionAdapter } from '@/utils.ts'
-import { PreferencesContext, SessionData } from '@/types/sessionData.ts'
+import { PreferencesContext, SessionData } from '@/types.ts'
 
 const bot = new Bot<PreferencesContext>(BOT_TOKEN!)
 
