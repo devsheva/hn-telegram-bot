@@ -1,10 +1,12 @@
 import { HN_API } from '@/config.ts'
-import { Item, itemSchema } from '@/types/item.ts'
+import { Item, itemSchema, storiesSchema, TopStories } from '@/types.ts'
 
-export const getTopStories = async (): Promise<number[]> => {
-  const data: number[] = await fetch(`${HN_API}/topstories.json`).then((res) =>
-    res.json()
-  )
+export const getTopStories = async (): Promise<TopStories> => {
+  const data: TopStories = await fetch(`${HN_API}/topstories.json`).then((
+    res,
+  ) => res.json())
+
+  storiesSchema.parse(data)
 
   return data
 }

@@ -1,5 +1,5 @@
 import { Composer, createConversation, R } from '@deps'
-import { ConversationContext, PreferencesContext } from '@/types/sessionData.ts'
+import { ConversationContext, PreferencesContext } from '@/types.ts'
 
 const composer = new Composer<PreferencesContext>()
 

@@ -1,6 +1,6 @@
-import { SessionData } from '@/types/sessionData.ts'
 import { freeStorage, MemorySessionStorage, R } from '@deps'
 import { APP_ENV } from '@/config.ts'
+import { SessionData } from '@/types.ts'
 
 export const getSessionAdapter = (token?: string) =>
   R.ifElse(
