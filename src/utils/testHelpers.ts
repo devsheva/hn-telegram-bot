@@ -11,8 +11,8 @@ import {
   session,
   Update,
   User,
-} from '@deps'
-import { faker } from '@dev_deps'
+} from '@/deps.ts'
+import { faker } from '@/dev_deps.ts'
 import { PreferencesContext, SessionData } from '@/types.ts'
 
 export interface ApiCall<M extends keyof RawApi = keyof RawApi> {

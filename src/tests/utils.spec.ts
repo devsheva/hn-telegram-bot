@@ -1,6 +1,6 @@
-import { MemorySessionStorage } from '@deps'
+import { MemorySessionStorage } from '@/deps.ts'
+import { assertInstanceOf, describe, it } from '@/dev_deps.ts'
 import { getSessionAdapter } from '@/utils.ts'
-import { assertInstanceOf, describe, it } from '@dev_deps'
 
 const adapter = getSessionAdapter()
 

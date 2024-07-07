@@ -1,3 +1,4 @@
+import { getTopStories } from '@/api.ts'
 import {
   assertInstanceOf,
   assertObjectMatch,
@@ -5,8 +6,7 @@ import {
   faker,
   it,
   stub,
-} from '@dev_deps'
-import { getTopStories } from '@/api.ts'
+} from '@/dev_deps.ts'
 
 describe('getTopStories', () => {
   it('should return an array of top stories', async () => {

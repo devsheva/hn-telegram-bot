@@ -1,6 +1,7 @@
 import { load } from '@std/dotenv'
-import { R } from '@deps'
+
 import { parseArgs } from '@std/cli'
+import { R } from '@/deps.ts'
 
 type EnvKeys = 'BOT_TOKEN' | 'APP_ENV'
 

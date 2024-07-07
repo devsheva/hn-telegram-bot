@@ -1,4 +1,4 @@
-import { Composer, createConversation, R } from '@deps'
+import { Composer, createConversation, R } from '../deps.ts'
 import { ConversationContext, PreferencesContext } from '@/types.ts'
 
 const composer = new Composer<PreferencesContext>()

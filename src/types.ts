@@ -4,7 +4,7 @@ import {
     ConversationFlavor,
     SessionFlavor,
     z,
-} from '@deps'
+} from '@/deps.ts'
 
 export const itemSchema = z.object({
     id: z.number(),

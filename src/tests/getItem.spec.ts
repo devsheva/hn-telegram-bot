@@ -6,7 +6,7 @@ import {
   describe,
   it,
   stub,
-} from '@dev_deps'
+} from '@/dev_deps.ts'
 
 describe('getItem', () => {
   it('should return an item', async () => {

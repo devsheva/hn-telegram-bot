@@ -1,6 +1,6 @@
+import { MemorySessionStorage, R } from '@/deps.ts'
+import { afterAll, assertEquals, beforeEach, describe, it } from '@/dev_deps.ts'
 import setup from '@/preference/setup.ts'
-import { MemorySessionStorage, R } from '@deps'
-import { afterAll, assertEquals, beforeEach, describe, it } from '@dev_deps'
 import { SessionData } from '@/types.ts'
 import {
   chat,
