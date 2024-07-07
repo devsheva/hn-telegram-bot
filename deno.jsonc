@@ -17,7 +17,7 @@
   "tasks": {
     "coverage": "rm -rf cov_profile && deno test -A --parallel --coverage=cov_profile -- --test && deno coverage --lcov --output=./coverage.lcov ./cov_profile",
     "dev": "deno run --watch --allow-read --allow-net --allow-env  src/bot.ts",
-    "test": "deno test -A --parallel -- --test"
+    "test": "APP_ENV=test BOT_TOKEN=dummy deno test -A --parallel -- --test"
   },
   "test": {
     "include": [

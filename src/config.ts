@@ -1,21 +1,17 @@
+import { R, z } from '@/deps.ts'
 import { load } from '@std/dotenv'
 
-import { parseArgs } from '@std/cli'
-import { R } from '@/deps.ts'
+const envSchema = z.object({
+  HN_API: z.string().default('https://hacker-news.firebaseio.com/v0/'),
+  BOT_TOKEN: z.string().default('dummy'),
+  APP_ENV: z.enum(['development', 'test', 'production']).default('development'),
+})
 
-type EnvKeys = 'BOT_TOKEN' | 'APP_ENV'
+try {
+  const env = await load({ export: true })
+  if (R.isEmpty(env)) throw new Error('no env file found')
+} catch {
+  console.warn('no env file found, using environment variables')
+}
 
-const isTest = parseArgs(Deno.args).test
-const envPath = R.ifElse(
-  R.equals(true),
-  R.always('.env.test'),
-  R.always('.env'),
-)(isTest)
-
-const env = await load({
-  envPath,
-}) as Record<EnvKeys, string>
-
-export const HN_API = 'https://hacker-news.firebaseio.com/v0/'
-export const BOT_TOKEN = env.BOT_TOKEN || Deno.env.get('BOT_TOKEN')
-export const APP_ENV = env.APP_ENV || Deno.env.get('APP_ENV')
+export const config = envSchema.parse(Deno.env.toObject())
