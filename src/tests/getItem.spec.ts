@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { getItem } from '@/api.ts'
 import {
   assertEquals,

@@ -12,11 +12,7 @@
     "include": ["src/**/*.ts"],
     "semiColons": false,
     "singleQuote": true,
-    "proseWrap": "preserve",
-    "exclude": [
-      "./node_modules/",
-      "./dist/"
-    ]
+    "proseWrap": "preserve"
   },
   "tasks": {
     "coverage": "rm -rf cov_profile && deno test -A --parallel --coverage=cov_profile -- --test && deno coverage --lcov --output=./coverage.lcov ./cov_profile",
