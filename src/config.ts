@@ -7,13 +7,13 @@ type EnvKeys = 'BOT_TOKEN' | 'APP_ENV'
 
 const isTest = parseArgs(Deno.args).test
 const envPath = R.ifElse(
-    R.equals(true),
-    R.always('.env.test'),
-    R.always('.env'),
+  R.equals(true),
+  R.always('.env.test'),
+  R.always('.env'),
 )(isTest)
 
 const env = await load({
-    envPath,
+  envPath,
 }) as Record<EnvKeys, string>
 
 export const HN_API = 'https://hacker-news.firebaseio.com/v0/'
