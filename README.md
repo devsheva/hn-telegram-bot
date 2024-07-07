@@ -1,6 +1,6 @@
 # hn-telegram-bot
 
-[![CodeFactor](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot/badge)](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot)  
+[![CodeFactor](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot/badge/develop)](https://www.codefactor.io/repository/github/devsheva/hn-telegram-bot/overview/develop)
 
 ![develop](https://github.com/devsheva/hn-telegram-bot/actions/workflows/deploy.yml/badge.svg?branch=develop)
 
