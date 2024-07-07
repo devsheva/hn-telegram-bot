@@ -15,8 +15,6 @@ const env = await load({
     envPath,
 }) as Record<EnvKeys, string>
 
-console.log('deno env', Deno.env.toObject())
-
 export const HN_API = 'https://hacker-news.firebaseio.com/v0/'
 export const BOT_TOKEN = env.BOT_TOKEN || Deno.env.get('BOT_TOKEN')
 export const APP_ENV = env.APP_ENV || Deno.env.get('APP_ENV')
