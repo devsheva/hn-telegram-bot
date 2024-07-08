@@ -28,7 +28,6 @@
   "compilerOptions": {
     "lib": ["deno.window", "DOM", "DOM.Iterable", "ESNext"],
     "strict": true,
-    "allowJs": true,
-    "checkJs": true
+    "allowJs": true
   }
 }

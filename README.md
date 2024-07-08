@@ -10,6 +10,7 @@ HackerNews Telegram Bot
 ### Development
 
 To develop in local just run `deno task dev` that will start in watch mode.
+To update the changelog just run `git-cliff -o CHANGELOG.md`.
 
 ### Testing
 
