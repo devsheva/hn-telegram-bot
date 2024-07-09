@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - [**breaking**] Complete deno migration by fixing last tests
 - Validate Item schema
 - Deploy workflow
+- Add changelog
 
 ### 🐛 Bug Fixes
 
@@ -110,6 +111,7 @@ All notable changes to this project will be documented in this file.
 - Cache dependencies during test
 - Ignore any lint in specs
 - Add format and lint job
+- AllowBreaking on updater
 
 ### Deno
 
