@@ -50,12 +50,7 @@ All notable changes to this project will be documented in this file.
 - Add codefactor badge
 - Move codefactor badge on top
 - Add deployment section
-
-### 🎨 Styling
-
-- Add newline on heading
-- Add develop codefactor
-- Fix fmt of api.ts
+- Update changelog
 
 ### 🧪 Testing
 
@@ -67,6 +62,12 @@ All notable changes to this project will be documented in this file.
 - It responds to setup command
 - [**breaking**] Fix specs adapting to vitest
 - Stub global fetch
+
+### 🎨 Styling
+
+- Add newline on heading
+- Add develop codefactor
+- Fix fmt of api.ts
 
 ### ⚙️ Miscellaneous Tasks
 
