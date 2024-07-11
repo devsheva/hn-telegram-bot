@@ -7,7 +7,7 @@ import {
   from,
   slashCommand,
   testSetupConversation,
-} from '@/utils/testHelpers.ts'
+} from '@/utils/test_helpers.ts'
 
 let storageAdapter: MemorySessionStorage<SessionData> | undefined
 
