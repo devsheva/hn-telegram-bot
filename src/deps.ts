@@ -1,4 +1,4 @@
-export * as R from 'https://x.nest.land/ramda@0.27.2/mod.ts'
+export * as R from 'https://deno.land/x/ramda@v0.27.2/mod.ts'
 export * from 'https://deno.land/x/grammy@v1.27.0/mod.ts'
 export * from 'https://deno.land/x/grammy_types@v3.11.0/mod.ts'
 export * from 'https://deno.land/x/grammy_conversations@v1.2.0/mod.ts'
