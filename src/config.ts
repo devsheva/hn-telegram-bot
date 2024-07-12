@@ -7,7 +7,7 @@ const envSchema = z.object({
   APP_ENV: z.enum(['development', 'test', 'production']).default('development'),
   GEMINI_API_KEY: z.string().default('dummy'),
   BASE_GEMINI_ENDPOINT: z.string().default(
-    'https://generativelanguage.googleapis.com/v1/',
+    'https://generativelanguage.googleapis.com/v1',
   ),
 })
 
