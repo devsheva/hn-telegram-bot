@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-explicit-any
 import { GeminiAdapter } from '@/ai_adapters/gemini.ts'
 import {
   assertEquals,
