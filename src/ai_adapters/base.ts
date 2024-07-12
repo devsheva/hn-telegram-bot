@@ -4,4 +4,5 @@ export type ResponseContent = {
 
 export interface BaseAdapter {
   generateContent(input: string): Promise<ResponseContent>
+  buildBody(): object
 }

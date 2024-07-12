@@ -8,6 +8,10 @@ describe('baseAdapter', () => {
         generateContent(input: string): Promise<ResponseContent> {
           return Promise.resolve({ text: 'Hello World!' })
         }
+
+        buildBody(): object {
+          return { text: 'Hello World!' }
+        }
       }
 
       const adapter = new MyAdapter()
@@ -20,6 +24,8 @@ describe('baseAdapter', () => {
       >(
         true,
       )
+
+      assertType<IsExact<typeof adapter.buildBody, () => object>>(true)
     })
   })
 })
