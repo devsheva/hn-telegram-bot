@@ -5,8 +5,8 @@ describe('baseAdapter', () => {
   describe('constructor', () => {
     it('correctly gets implemented', () => {
       class MyAdapter implements BaseAdapter {
-        generateContent(text: string): Promise<ResponseContent> {
-          return Promise.resolve({ text })
+        generateContent(input: string): Promise<ResponseContent> {
+          return Promise.resolve({ text: 'Hello World!' })
         }
       }
 

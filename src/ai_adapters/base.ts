@@ -1,7 +1,7 @@
 export type ResponseContent = {
-    text: string
+  text: string
 }
 
 export interface BaseAdapter {
-    generateContent(text: string): Promise<ResponseContent>
+  generateContent(input: string): Promise<ResponseContent>
 }
