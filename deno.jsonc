@@ -2,6 +2,7 @@
   "imports": {
     "@/": "./src/",
     "@bot/": "./src/bot/",
+    "@adapters/": "./src/adapters/",
     "@std/assert": "jsr:@std/assert@^0.226.0",
     "@std/dotenv": "jsr:@std/dotenv@^0.224.2",
     "@std/testing": "jsr:@std/testing@^0.225.3",
@@ -18,11 +19,6 @@
     "coverage": "rm -rf cov_profile && deno test -A --parallel --coverage=cov_profile -- --test && deno coverage --lcov --output=./coverage.lcov ./cov_profile",
     "dev": "deno run --watch --allow-read --allow-net --allow-env  src/bot.ts",
     "test": "APP_ENV=test BOT_TOKEN=dummy deno test -A --parallel --watch -- --test"
-  },
-  "test": {
-    "include": [
-      "src/**/*.spec.ts"
-    ]
   },
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
