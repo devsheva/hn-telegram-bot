@@ -11,6 +11,34 @@ describe('GeminiAdapter', () => {
       assertInstanceOf(adapter, GeminiAdapter)
       assertExists(adapter['_apiKey'])
       assertExists(adapter['_baseUrl'])
+assertExists(adapter['_model'])
+    })
+  })
+
+  describe('buildBody', () => {
+    it('throws an error when input not provided', () => {
+      const adapter = new GeminiAdapter()
+
+      assertThrows(
+        () => adapter.buildBody(''),
+      )
+    })
+
+    it('should return a request content', () => {
+      const adapter = new GeminiAdapter()
+      const requestContent = adapter.buildBody('Hello, world!')
+
+      assertObjectMatch(requestContent, {
+        contents: [
+          {
+            parts: [{
+              text: 'Hello, world!',
+            }],
+          },
+        ],
+      })
+
+      assertType<IsExact<typeof requestContent, RequestContent>>(true)
     })
   })
 

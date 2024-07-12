@@ -1,10 +1,12 @@
 import { BaseAdapter, ResponseContent } from '@/ai_adapters/base.ts'
 import { R } from '@/deps.ts'
 import { config } from '@/config.ts'
+import { RequestContent } from '@/types.ts'
 
 export class GeminiAdapter implements BaseAdapter {
   private readonly _apiKey: string
   private readonly _baseUrl: string
+  private readonly _model: string
 
   constructor() {
     this._apiKey = config.GEMINI_API_KEY
@@ -24,5 +26,22 @@ export class GeminiAdapter implements BaseAdapter {
         text: 'Hello, world!',
       })
     })
+  }
+
+  /**
+   * Build the body for the Gemini API.
+   */
+  public buildBody(input: string): RequestContent {
+    if (R.isEmpty(input)) {
+      throw new Error('Text is required')
+    }
+
+    const body: RequestContent = R.assocPath(
+      ['contents', 0, 'parts', 0, 'text'],
+      input,
+      {},
+    )
+
+    return body
   }
 }
