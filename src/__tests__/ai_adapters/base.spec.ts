@@ -5,11 +5,11 @@ describe('baseAdapter', () => {
   describe('constructor', () => {
     it('correctly gets implemented', () => {
       class MyAdapter implements BaseAdapter {
-        generateContent(input: string): Promise<ResponseContent> {
+        generateContent(_input: string): Promise<ResponseContent> {
           return Promise.resolve({ text: 'Hello World!' })
         }
 
-        buildBody(): object {
+        buildBody(_input: string): object {
           return { text: 'Hello World!' }
         }
       }
@@ -25,7 +25,9 @@ describe('baseAdapter', () => {
         true,
       )
 
-      assertType<IsExact<typeof adapter.buildBody, () => object>>(true)
+      assertType<IsExact<typeof adapter.buildBody, (input: string) => object>>(
+        true,
+      )
     })
   })
 })
