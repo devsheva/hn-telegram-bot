@@ -2,7 +2,7 @@ import { R, z } from '@/deps.ts'
 import { load } from '@std/dotenv'
 
 const envSchema = z.object({
-  HN_API: z.string().default('https://hacker-news.firebaseio.com/v0/'),
+  HN_API: z.string().default('https://hacker-news.firebaseio.com/v0'),
   BOT_TOKEN: z.string().default('dummy'),
   APP_ENV: z.enum(['development', 'test', 'production']).default('development'),
   GEMINI_API_KEY: z.string().default('dummy'),
