@@ -36,4 +36,6 @@ describe('bulkRetrieveItems', () => {
     assertEquals(result.length, ids.length)
     assertEquals(result, fakeItems)
   })
+
+  // TODO: add error handling tests
 })
