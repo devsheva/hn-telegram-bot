@@ -107,3 +107,12 @@ export const testSetupConversation = async (
 
   return results
 }
+
+export function promisifyFactoryObj<TFactory>(
+  obj: TFactory,
+  status = 200,
+): Promise<Response> {
+  return Promise.resolve(
+    new Response(JSON.stringify(obj), { status }),
+  )
+}

@@ -4,17 +4,7 @@ export async function bulkRetrieveItems(ids: number[]): Promise<Item[]> {
     return []
   }
 
-  const urlJoiner = R.join('/')
-  const fetchItem = async (id: number) => {
-    const response = await fetch(
-      urlJoiner([config.HN_API, 'item', `${id}.json`]),
-    )
-
-    const data = await response.json()
-    return data
-  }
-
-  const promises = R.map(fetchItem, ids)
+  const promises = R.map(getItem, ids)
   const items = R.flatten(await Promise.all(promises))
 
   return R.flatten(items)

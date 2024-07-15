@@ -13,20 +13,20 @@ describe('bulkRetrieveItems', () => {
 
   it('retrieves items in bulk', async () => {
     const fakeItems = R.times(
-      (id: number) =>
-        Promise.resolve(
-          new Response(
-            JSON.stringify(id),
-            { status: 200 },
-          ),
-        ),
+      (id: number) => ({
+        id,
+        type: 'story',
+        by: faker.person.fullName(),
+        title: faker.lorem.sentence(),
+        time: faker.date.recent().getTime(),
+      } as Item),
       3,
     )
 
     using _fetchStub = stub(
       globalThis,
       'fetch',
-      returnsNext(fakeItems),
+      returnsNext(R.map(promisifyFactoryObj<Item>, fakeItems)),
     )
 
     const ids = [1, 2, 3]
@@ -34,6 +34,6 @@ describe('bulkRetrieveItems', () => {
 
     assertType<IsExact<typeof result, Item[]>>(true)
     assertEquals(result.length, ids.length)
-    assertEquals(result, [])
+    assertEquals(result, fakeItems)
   })
 })
