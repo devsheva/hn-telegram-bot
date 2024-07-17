@@ -12,7 +12,7 @@ import {
   it,
   stub,
 } from '@/dev_deps.ts'
-import { RequestContent } from '@/types.ts'
+import { RequestContent, responseSchema } from '@/types.ts'
 import { ResponseContent } from '@/ai_adapters/base.ts'
 
 describe('GeminiAdapter', () => {
@@ -50,6 +50,7 @@ describe('GeminiAdapter', () => {
         ],
         generationConfig: {
           responseMimeType: 'application/json',
+          responseSchema,
         },
       })
 

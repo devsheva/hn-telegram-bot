@@ -108,6 +108,18 @@ const generationConfigSchema = z.object({
   topK: z.number().int().optional(),
 })
 
+export const responseSchema = {
+  type: 'object',
+  properties: {
+    storyIds: {
+      type: 'array',
+      items: {
+        type: 'number',
+      },
+    },
+  },
+}
+
 const requestContentSchema = z.object({
   contents: z.array(contentSchema),
   generationConfig: generationConfigSchema,

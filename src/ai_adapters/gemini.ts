@@ -1,6 +1,6 @@
 import { config } from '@/config.ts'
 import { R } from '@/deps.ts'
-import { RequestContent } from '@/types.ts'
+import { RequestContent, responseSchema } from '@/types.ts'
 import { BaseAdapter, HttpStatus, ResponseContent } from '@/ai_adapters/base.ts'
 import { filteredContentSchema } from '@/types.ts'
 
@@ -81,6 +81,10 @@ export class GeminiAdapter implements BaseAdapter {
       R.assocPath(
         ['generationConfig', 'responseMimeType'],
         'application/json',
+      ),
+      R.assocPath(
+        ['generationConfig', 'responseSchema'],
+        responseSchema,
       ),
     )({})
 
