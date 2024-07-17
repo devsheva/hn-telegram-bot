@@ -36,7 +36,7 @@ export class GeminiAdapter implements BaseAdapter {
         {
           method: 'post',
           headers: {
-            'content-type': 'application/json',
+            'Content-Type': 'application/json',
             'x-goog-api-key': this._apiKey,
           },
           body: JSON.stringify(
@@ -73,11 +73,16 @@ export class GeminiAdapter implements BaseAdapter {
       throw new Error('Text is required')
     }
 
-    const body: RequestContent = R.assocPath(
-      ['contents', 0, 'parts', 0, 'text'],
-      input,
-      {},
-    )
+    const body: RequestContent = R.pipe(
+      R.assocPath(
+        ['contents', 0, 'parts', 0, 'text'],
+        input,
+      ),
+      R.assocPath(
+        ['generationConfig', 'responseMimeType'],
+        'application/json',
+      ),
+    )({})
 
     return body
   }

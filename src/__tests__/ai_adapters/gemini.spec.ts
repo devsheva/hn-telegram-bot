@@ -48,6 +48,9 @@ describe('GeminiAdapter', () => {
             }],
           },
         ],
+        generationConfig: {
+          responseMimeType: 'application/json',
+        },
       })
 
       assertType<IsExact<typeof requestContent, RequestContent>>(true)

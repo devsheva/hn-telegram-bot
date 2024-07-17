@@ -94,8 +94,23 @@ const contentSchema = z.object({
   ]).optional(),
 })
 
+const generationConfigSchema = z.object({
+  stopSequences: z.array(z.string()).optional(),
+  candidateCount: z.number().int().optional(),
+  maxOutputTokens: z.number().int().optional(),
+  temperature: z.number().int().optional(),
+  topP: z.number().int().optional(),
+  responseMimeType: z.enum([
+    'application/json',
+    'text/plain',
+  ]).optional().default('application/json'),
+  responseSchema: z.object({}).optional(),
+  topK: z.number().int().optional(),
+})
+
 const requestContentSchema = z.object({
   contents: z.array(contentSchema),
+  generationConfig: generationConfigSchema,
 })
 
 export type RequestContent = z.infer<typeof requestContentSchema>
