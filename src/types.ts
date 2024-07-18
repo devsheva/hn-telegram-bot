@@ -119,7 +119,6 @@ export const responseSchema = {
     },
   },
 }
-
 const requestContentSchema = z.object({
   contents: z.array(contentSchema),
   generationConfig: generationConfigSchema,
