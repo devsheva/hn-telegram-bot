@@ -18,7 +18,7 @@ Put all tests under this [folder](src/__tests__) and run `deno task test`, which
 
 > Note: this is a temporary workaround until conversations plugin is fixed
 
-When running tests on a composer that involves conversation, always add `await new Promise(r => setTimeout(r, 0))`, so it doesn't lead to 
+When running tests on a composer that involves conversation, always add `await new Promise(r => setTimeout(r, 0))`, so it doesn't lead to
 deno leaks due to sanitizers.
 
 ### Tips

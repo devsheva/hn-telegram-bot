@@ -1,10 +1,20 @@
-import { freeStorage, MemorySessionStorage, R } from '@/deps.ts'
+import {
+  createClient,
+  MemorySessionStorage,
+  R,
+  supabaseAdapter,
+} from '@/deps.ts'
 import { SessionData } from '@/types.ts'
 import { config } from '@/config.ts'
 
-export const getSessionAdapter = (token?: string) =>
+const supabase = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
+
+export const getSessionAdapter = () =>
   R.ifElse(
     R.equals('test'),
     R.always(new MemorySessionStorage<SessionData>()),
-    R.always(freeStorage<SessionData>(token!)),
+    R.always(supabaseAdapter({
+      supabase,
+      table: 'sessions',
+    })),
   )(config.APP_ENV)
