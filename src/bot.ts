@@ -11,11 +11,10 @@ bot.command(
   (ctx) =>
     ctx.reply('Bot is under construction. Please wait for the next update.'),
 )
-
 bot.use(
   session({
     initial: (): SessionData => ({ preferences: [] }),
-    storage: getSessionAdapter(config.BOT_TOKEN),
+    storage: getSessionAdapter(),
   }),
   conversations(),
 )
