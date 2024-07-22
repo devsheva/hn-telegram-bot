@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Validate Item schema
 - Deploy workflow
 - Add changelog
+- Add supabase as storage for preferences
 
 ### 🐛 Bug Fixes
 
@@ -51,6 +52,7 @@ All notable changes to this project will be documented in this file.
 - Move codefactor badge on top
 - Add deployment section
 - Update changelog
+- Prioritize testing over styling in changelog
 
 ### 🧪 Testing
 
