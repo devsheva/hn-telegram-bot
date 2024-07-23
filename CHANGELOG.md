@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
+- *(analysis)* Respond with filtered story titles based on user preferences
+- *(gemini-adapter)* Add responseSchema for storyIds
+- *(gemini-adapter)* Replace with v1beta API and add responseMimeType on config
+- *(gemini-adapter)* Implement generateContent call with response parsing
 - Add changelog
 - Deploy workflow
 - Validate Item schema
@@ -41,6 +45,9 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
+- Removed setMyCommands tip since an issue has been opened for it(#13)
+- Fix typo on README
+- Sort commits by newest for git-cliff
 - Prioritize testing over styling in changelog
 - Update changelog
 - Add deployment section
@@ -55,6 +62,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🧪 Testing
 
+- *(analysis)* Add promisify factory with item mocks
 - Stub global fetch
 - [**breaking**] Fix specs adapting to vitest
 - It responds to setup command
@@ -66,6 +74,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🎨 Styling
 
+- Remove unused no-explicit-any in spec
 - Set editor.tabSize on 2
 - Underscore file names
 - Fix fmt of api.ts
@@ -74,6 +83,14 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(utils)* Add mapIndexed fn
+- *(analysis)* Add error tests todo for __bulkRetrieveItems__
+- *(analysis)* Bulk retrieve top stories as items with parallel requests
+- *(gemini-adapter)* Add body builder function
+- *(ai-adapter)* Add body call signature
+- *(ai-adapter)* Add buildBody method
+- *(gemini-adapter)* Init apiKey and baseUrl
+- *(ai-adapter)* Rename text to input as generateContent param
 - *(ai-adapter)* Init base adapter
 - Upgrade deno to 1.45.1
 - *(analysis)* Init folder structure
