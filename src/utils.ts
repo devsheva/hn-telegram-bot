@@ -6,15 +6,19 @@ import {
 } from '@/deps.ts'
 import { SessionData } from '@/types.ts'
 import { config } from '@/config.ts'
+import { Database } from '@/database.ts'
 
-const supabase = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
+export const connection = createClient<Database>(
+  config.SUPABASE_URL,
+  config.SUPABASE_KEY,
+)
 
 export const getSessionAdapter = () =>
   R.ifElse(
     R.equals('test'),
     R.always(new MemorySessionStorage<SessionData>()),
     R.always(supabaseAdapter({
-      supabase,
+      supabase: connection,
       table: 'sessions',
     })),
   )(config.APP_ENV)

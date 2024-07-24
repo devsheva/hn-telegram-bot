@@ -36,6 +36,8 @@ export interface SessionData {
   preferences: string[]
 }
 
+export type Preferences = SessionData['preferences']
+
 export type PreferencesContext =
   & Context
   & SessionFlavor<SessionData>
