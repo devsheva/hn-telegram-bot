@@ -116,3 +116,7 @@ export function promisifyFactoryObj<TFactory>(
     new Response(JSON.stringify(obj), { status }),
   )
 }
+export async function cleanupDatabase() {
+  await connection.from('sessions')
+    .delete().like('id', 'test%')
+}
