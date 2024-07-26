@@ -15,6 +15,7 @@ import {
 } from '@/deps.ts'
 import { faker } from '@/dev_deps.ts'
 import { PreferencesContext, SessionData } from '@/types.ts'
+import { connection } from '@/utils.ts'
 
 export interface ApiCall<M extends keyof RawApi = keyof RawApi> {
   method: M
@@ -116,6 +117,24 @@ export function promisifyFactoryObj<TFactory>(
     new Response(JSON.stringify(obj), { status }),
   )
 }
+
+export async function seedDatabase() {
+  await connection.from('sessions')
+    .upsert(
+      R.times(
+        (id: number) => ({
+          id: R.join('_', ['test', id]),
+          session: JSON.stringify({
+            preferences: faker.helpers.multiple(faker.commerce.department, {
+              count: faker.number.int({ min: 1, max: 5 }),
+            }),
+          }),
+        }),
+        10,
+      ),
+    )
+}
+
 export async function cleanupDatabase() {
   await connection.from('sessions')
     .delete().like('id', 'test%')
