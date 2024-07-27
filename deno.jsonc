@@ -20,9 +20,10 @@
     "dev": "deno run --watch --allow-read --allow-net --allow-env  src/bot.ts",
     "test": "deno test -A --parallel --watch -- --test"
   },
+  "unstable": ["cron"],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
-    "lib": ["deno.window", "DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["deno.window", "deno.unstable" ],
     "strict": true,
     "allowJs": true
   }
