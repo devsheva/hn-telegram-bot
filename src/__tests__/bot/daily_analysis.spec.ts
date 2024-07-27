@@ -29,7 +29,9 @@ describe('dailyAnalysis', () => {
 describe('getUsersPreferences', () => {
   it('should return the user preferences', async () => {
     const usersPreferences = await getUsersPreferences()
-    assertType<IsExact<typeof usersPreferences, Preferences>>(true)
+    assertType<
+      IsExact<typeof usersPreferences, { id: string; session: string }[]>
+    >(true)
   })
 
   it('should throw an error if the response is not valid', async () => {
