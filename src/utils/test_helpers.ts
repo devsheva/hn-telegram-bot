@@ -30,6 +30,8 @@ export const botInfo = {
   can_join_groups: true as const,
   can_read_all_group_messages: false as const,
   supports_inline_queries: false as const,
+  can_connect_to_business: false,
+  has_main_web_app: false,
 }
 
 export const chat: Chat.PrivateChat = {
@@ -130,7 +132,7 @@ export async function seedDatabase() {
             }),
           }),
         }),
-        10,
+        5,
       ),
     )
 }
