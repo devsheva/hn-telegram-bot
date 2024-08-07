@@ -17,7 +17,7 @@ const envSchema = z.object({
 
 try {
   const env = R.ifElse(
-    R.propEq('test', true),
+    R.propEq('test', 'true'),
     R.always({}),
     async () => await load(),
   )(parseArgs(Deno.args))

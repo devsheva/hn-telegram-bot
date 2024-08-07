@@ -19,7 +19,7 @@ export const itemSchema = z.object({
   kids: z.optional(z.unknown()),
   url: z.optional(z.string()),
   score: z.optional(z.number()),
-  title: z.optional(z.string()),
+  title: z.string(),
   parts: z.optional(z.unknown()),
   descendants: z.optional(z.number()),
 }).nullable()

@@ -30,7 +30,10 @@ describe('getUsersPreferences', () => {
   it('should return the user preferences', async () => {
     const usersPreferences = await getUsersPreferences()
     assertType<
-      IsExact<typeof usersPreferences, { id: string; session: string }[]>
+      IsExact<
+        typeof usersPreferences,
+        { id: string; session: string | null }[]
+      >
     >(true)
   })
 
