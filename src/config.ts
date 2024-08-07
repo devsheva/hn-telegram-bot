@@ -7,6 +7,7 @@ const envSchema = z.object({
   APP_ENV: z.enum(['development', 'test', 'production']).default('development'),
   SUPABASE_URL: z.string().default('dummy'),
   SUPABASE_KEY: z.string().default('dummy'),
+  SUPABASE_SCHEMA: z.string().default('public'),
 })
 
 try {
