@@ -10,7 +10,8 @@
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.1",
       "jsr:@std/internal@^1.0.1": "jsr:@std/internal@1.0.1",
       "jsr:@std/testing@^1.0.0": "jsr:@std/testing@1.0.0",
-      "npm:@types/node": "npm:@types/node@18.16.19"
+      "npm:@types/node": "npm:@types/node@18.16.19",
+      "npm:@types/ramda": "npm:@types/ramda@0.30.1"
     },
     "jsr": {
       "@std/assert@0.226.0": {
@@ -50,6 +51,22 @@
       "@types/node@18.16.19": {
         "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
         "dependencies": {}
+      },
+      "@types/ramda@0.30.1": {
+        "integrity": "sha512-aoyF/ADPL6N+/NXXfhPWF+Qj6w1Cql59m9wX0Gi15uyF+bpzXeLd63HPdiTDE2bmLXfNcVufsDPKmbfOrOzTBA==",
+        "dependencies": {
+          "types-ramda": "types-ramda@0.30.1"
+        }
+      },
+      "ts-toolbelt@9.6.0": {
+        "integrity": "sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==",
+        "dependencies": {}
+      },
+      "types-ramda@0.30.1": {
+        "integrity": "sha512-1HTsf5/QVRmLzcGfldPFvkVsAdi1db1BBKzi7iW3KBUlOICg/nKnFS+jGqDJS3YD8VsWbAh7JiHeBvbsw8RPxA==",
+        "dependencies": {
+          "ts-toolbelt": "ts-toolbelt@9.6.0"
+        }
       }
     }
   },

@@ -24,6 +24,7 @@ To update the changelog just run `git-cliff -o CHANGELOG.md`.
 Put all tests under this [folder](src/__tests__) and run `deno task test`, which will run test environment with Deno in watch mode.
 
 You must pass at least the following environment variables to make testing work:
+
 - APP_ENV
 - SUPABASE_URL
 - SUPABASE_KEY
