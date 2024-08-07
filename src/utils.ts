@@ -13,7 +13,7 @@ export const connection = createClient<Database>(
   config.SUPABASE_KEY,
   {
     db: {
-      schema: config.SUPABASE_SCHEMA,
+      schema: config.SUPABASE_SCHEMA as any, // FIXME: remove any when found a way to type custom schemas (#20)
     },
   },
 )
