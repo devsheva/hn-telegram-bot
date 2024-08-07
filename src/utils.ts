@@ -7,7 +7,11 @@ import {
 import { SessionData } from '@/types.ts'
 import { config } from '@/config.ts'
 
-const supabase = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
+const supabase = createClient(config.SUPABASE_URL, config.SUPABASE_KEY, {
+  db: {
+    schema: config.SUPABASE_SCHEMA,
+  },
+})
 
 export const getSessionAdapter = () =>
   R.ifElse(
@@ -16,5 +20,5 @@ export const getSessionAdapter = () =>
     R.always(supabaseAdapter({
       supabase,
       table: 'sessions',
-    })),
+    } as any)),
   )(config.APP_ENV)

@@ -14,6 +14,13 @@ To update the changelog just run `git-cliff -o CHANGELOG.md`.
 
 ### Testing
 
+**Pass the necessary environment variables to run against test mode!**
+
+- APP_ENV=test
+- SUPABASE_KEY=your_key
+- SUPABASE_SCHEMA=test
+- SUPABASE_URL=your_url
+
 Put all tests under this [folder](src/__tests__) and run `deno task test`, which will run test environment with Deno in watch mode
 
 > Note: this is a temporary workaround until conversations plugin is fixed
