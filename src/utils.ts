@@ -11,6 +11,11 @@ import { Database } from '@/database.ts'
 export const connection = createClient<Database>(
   config.SUPABASE_URL,
   config.SUPABASE_KEY,
+  {
+    db: {
+      schema: config.SUPABASE_SCHEMA,
+    },
+  },
 )
 
 export const getSessionAdapter = () =>
@@ -20,5 +25,5 @@ export const getSessionAdapter = () =>
     R.always(supabaseAdapter({
       supabase: connection,
       table: 'sessions',
-    })),
+    } as any)),
   )(config.APP_ENV)

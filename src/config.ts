@@ -12,6 +12,7 @@ const envSchema = z.object({
   ),
   SUPABASE_URL: z.string().default('dummy'),
   SUPABASE_KEY: z.string().default('dummy'),
+  SUPABASE_SCHEMA: z.string().default('public'),
 })
 
 try {
