@@ -22,8 +22,8 @@ export const getSessionAdapter = () =>
   R.ifElse(
     R.equals('test'),
     R.always(new MemorySessionStorage<SessionData>()),
-    R.always(supabaseAdapter({
+    R.always(supabaseAdapter<SessionData>({
       supabase: connection,
       table: 'sessions',
-    } as any)),
+    })),
   )(config.APP_ENV)
