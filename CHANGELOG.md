@@ -6,118 +6,168 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Get 500 top stories
-- Remove axios to use builtin fetch API
-- Get storage adapter for env
-- Determine session adapter in bot setup
-- Ask for preference
-- Store preferences in session with conversations
-- Reset preferences and fix convo loop
-- [**breaking**] Replace jest with vitest cause of esm troubles
-- Add list preferences cmd
-- [**breaking**] Complete deno migration by fixing last tests
-- Validate Item schema
-- Deploy workflow
-- Add changelog
+- *(analysis)* Send message to user
+- Add daily analysis cron job
+- *(supabase)* Add test schema support
 - Add supabase as storage for preferences
+- *(analysis)* Respond with filtered story titles based on user preferences
+- *(gemini-adapter)* Add responseSchema for storyIds
+- *(gemini-adapter)* Replace with v1beta API and add responseMimeType on config
+- *(gemini-adapter)* Implement generateContent call with response parsing
+- Add changelog
+- Deploy workflow
+- Validate Item schema
+- [**breaking**] Complete deno migration by fixing last tests
+- Add list preferences cmd
+- [**breaking**] Replace jest with vitest cause of esm troubles
+- Reset preferences and fix convo loop
+- Store preferences in session with conversations
+- Ask for preference
+- Determine session adapter in bot setup
+- Get storage adapter for env
+- Remove axios to use builtin fetch API
+- Get 500 top stories
 
 ### 🐛 Bug Fixes
 
-- Remove ts-node and use tsx with watch mode
-- Add ESM support for jest
-- Disable noEmit during build
-- Remove overkilling functions and declare adapters inside always condition
-- Use test flag on test task to retrieve right env file
-- Adapt for deno deploy
-- Import new types in bot.ts
-- Change root to cwd
-- Remove env leaking log
+- *(utils)* Type generic supabaseAdapter
+- Correctly type users preferences group
+- *(config)* Restore test task arg when setting env
 - Add missing test variables for coverage
+- Remove env leaking log
+- Change root to cwd
+- Import new types in bot.ts
+- Adapt for deno deploy
+- Use test flag on test task to retrieve right env file
+- Remove overkilling functions and declare adapters inside always condition
+- Disable noEmit during build
+- Add ESM support for jest
+- Remove ts-node and use tsx with watch mode
 
 ### 🚜 Refactor
 
-- Add generic slashCommand generator
-- [**breaking**] Move types in a single declaration file
+- *(gemini-adapter)* Simplify body object gen
 - Improve env loading with zod
+- [**breaking**] Move types in a single declaration file
+- Add generic slashCommand generator
 
 ### 📚 Documentation
 
-- Add usage instructions
-- Update README with test instructions
-- Add testing guideline
-- Add setMyCommands usage tip
-- Update readme with right usage of jest object
-- Add todo for clear preferences and update readme with BDD tips
-- Add codefactor badge
-- Move codefactor badge on top
-- Add deployment section
 - Update changelog
+- Add instructions to run tests with test schema
+- Force env variable setup
+- Removed setMyCommands tip since an issue has been opened for it(#13)
+- Fix typo on README
+- Sort commits by newest for git-cliff
 - Prioritize testing over styling in changelog
+- Update changelog
+- Add deployment section
+- Move codefactor badge on top
+- Add codefactor badge
+- Add todo for clear preferences and update readme with BDD tips
+- Update readme with right usage of jest object
+- Add setMyCommands usage tip
+- Add testing guideline
+- Update README with test instructions
+- Add usage instructions
 
 ### 🧪 Testing
 
-- Add watch flag
-- Mock getItem api
-- Should return null for not found item
-- Add faker and mock array of top stories
-- Add type checkers
-- It responds to setup command
-- [**breaking**] Fix specs adapting to vitest
+- *(helpers)* Cleanup database sessions
+- *(analysis)* Add promisify factory with item mocks
 - Stub global fetch
+- [**breaking**] Fix specs adapting to vitest
+- It responds to setup command
+- Add type checkers
+- Add faker and mock array of top stories
+- Should return null for not found item
+- Mock getItem api
+- Add watch flag
 
 ### 🎨 Styling
 
-- Add newline on heading
-- Add develop codefactor
+- Remove unused no-explicit-any in spec
+- Set editor.tabSize on 2
+- Underscore file names
 - Fix fmt of api.ts
+- Add develop codefactor
+- Add newline on heading
 
 ### ⚙️ Miscellaneous Tasks
 
-- Init project
-- Extend ProcessEnv of node with BOT_TOKEN
-- Add build script for npm to run tsc
-- Add support of dotenvx
-- Move env declaration at root
-- Config jest for ts and move to src folder
-- Config jest to match only __tests__ folder
-- Improve item typing for req
-- Remove error test
-- Add tsconfig.build for excluding specs on compilation
-- Replace telegraf with grammY
-- Init grammy bot
-- [**breaking**] Use bot.ts as entrypoint
-- Init setup composer
-- Remove some types and cleanup config
-- Init conversation plugin
+- Update config.ts to load environment variables with export option
+- *(analysis)* Parse user preferences and filter their stories
+- Correctly type all parts using ramda
+- Add deno check task to improve code quality
+- *(types)* Type getUserPreferences
+- *(ramda)* Add @types/ramda
+- Remove any type from custom schemas in utils.ts
+- Upgrade @std/testing to major 1
+- Fix supabase deps
+- Upgrade deno to 1.45.4 and include unstable cron
+- *(analysis)* Get users preferences and seed db
+- Add supabase secrets
+- *(supabase)* Add db types and client connection
+- Update changelog
+- *(utils)* Add mapIndexed fn
+- *(analysis)* Add error tests todo for __bulkRetrieveItems__
+- *(analysis)* Bulk retrieve top stories as items with parallel requests
+- *(gemini-adapter)* Add body builder function
+- *(ai-adapter)* Add body call signature
+- *(ai-adapter)* Add buildBody method
+- *(gemini-adapter)* Init apiKey and baseUrl
+- *(ai-adapter)* Rename text to input as generateContent param
+- *(ai-adapter)* Init base adapter
+- Upgrade deno to 1.45.1
+- *(analysis)* Init folder structure
+- *(gemini-response)* Add zod types for request and response schema of `generateContent` api
+- Point ramda package to deno instead of nest
+- AllowBreaking on updater
+- Add format and lint job
+- Ignore any lint in specs
+- Cache dependencies during test
+- Upgrade grammy to 1.27 with latest types
+- Reignore .env.test
+- Upgrade packages
+- Manual update workflow
+- Add update workflow
+- Add codecov
+- Add test job dependency
+- Do not ignore .env test
+- Add zod package
+- Add coverage task
+- Add recommended deno ext
+- [**breaking**] Add grammy from deno
+- [**breaking**] Add faker deno module
+- [**breaking**] Add ramda external dep
+- [**breaking**] Add deno and remove type definitions and tsconfig
+- Add dependabot
+- Upgrade dotenvx to major 1
+- [**breaking**] Remove export of bot and use bot.ts as entrypoint
+- Upgrade typescript npm
 - Upgrade grammy
 - Add todo on mocking api calls
 - Upgrade grammy
-- Upgrade typescript npm
-- [**breaking**] Remove export of bot and use bot.ts as entrypoint
-- Upgrade dotenvx to major 1
-- Add dependabot
-- [**breaking**] Add deno and remove type definitions and tsconfig
-- [**breaking**] Add ramda external dep
-- [**breaking**] Add faker deno module
-- [**breaking**] Add grammy from deno
-- Add recommended deno ext
-- Add coverage task
-- Add zod package
-- Do not ignore .env test
-- Add test job dependency
-- Add codecov
-- Add update workflow
-- Manual update workflow
-- Upgrade packages
-- Reignore .env.test
-- Upgrade grammy to 1.27 with latest types
-- Cache dependencies during test
-- Ignore any lint in specs
-- Add format and lint job
-- AllowBreaking on updater
+- Init conversation plugin
+- Remove some types and cleanup config
+- Init setup composer
+- [**breaking**] Use bot.ts as entrypoint
+- Init grammy bot
+- Replace telegraf with grammY
+- Add tsconfig.build for excluding specs on compilation
+- Remove error test
+- Improve item typing for req
+- Config jest to match only __tests__ folder
+- Config jest for ts and move to src folder
+- Move env declaration at root
+- Add support of dotenvx
+- Add build script for npm to run tsc
+- Extend ProcessEnv of node with BOT_TOKEN
+- Init project
 
 ### Deno
 
+- Update imports
 - Update imports
 
 <!-- generated by git-cliff -->

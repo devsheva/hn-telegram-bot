@@ -15,6 +15,7 @@ import {
 } from '@/deps.ts'
 import { faker } from '@/dev_deps.ts'
 import { PreferencesContext, SessionData } from '@/types.ts'
+import { connection } from '@/utils.ts'
 
 export interface ApiCall<M extends keyof RawApi = keyof RawApi> {
   method: M
@@ -29,6 +30,8 @@ export const botInfo = {
   can_join_groups: true as const,
   can_read_all_group_messages: false as const,
   supports_inline_queries: false as const,
+  can_connect_to_business: false,
+  has_main_web_app: false,
 }
 
 export const chat: Chat.PrivateChat = {
@@ -106,4 +109,35 @@ export const testSetupConversation = async (
   }
 
   return results
+}
+
+export function promisifyFactoryObj<TFactory>(
+  obj: TFactory,
+  status = 200,
+): Promise<Response> {
+  return Promise.resolve(
+    new Response(JSON.stringify(obj), { status }),
+  )
+}
+
+export async function seedDatabase() {
+  await connection.from('sessions')
+    .upsert(
+      R.times(
+        (id: number) => ({
+          id: R.join('_', ['test', id]),
+          session: JSON.stringify({
+            preferences: faker.helpers.multiple(faker.commerce.department, {
+              count: faker.number.int({ min: 1, max: 5 }),
+            }),
+          }),
+        }),
+        1,
+      ),
+    )
+}
+
+export async function cleanupDatabase() {
+  await connection.from('sessions')
+    .delete().like('id', 'test%')
 }

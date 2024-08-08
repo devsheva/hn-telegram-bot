@@ -14,6 +14,8 @@ jobs:
     env:
       APP_ENV: test
       BOT_TOKEN: dummy
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
 
     steps:
       - name: Setup repo

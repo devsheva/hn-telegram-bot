@@ -21,7 +21,13 @@ To update the changelog just run `git-cliff -o CHANGELOG.md`.
 - SUPABASE_SCHEMA=test
 - SUPABASE_URL=your_url
 
-Put all tests under this [folder](src/__tests__) and run `deno task test`, which will run test environment with Deno in watch mode
+Put all tests under this [folder](src/__tests__) and run `deno task test`, which will run test environment with Deno in watch mode.
+
+You must pass at least the following environment variables to make testing work:
+
+- APP_ENV
+- SUPABASE_URL
+- SUPABASE_KEY
 
 > Note: this is a temporary workaround until conversations plugin is fixed
 
@@ -30,7 +36,6 @@ deno leaks due to sanitizers.
 
 ### Tips
 
-Use `setMyCommands` on deployment, or configure it directly with **@BotFather**
 This project is made by mainly following BDD principles, so you should stick to it, you won't regret.
 
 ## Deployment
