@@ -2,7 +2,6 @@ import { connection } from '@/utils.ts'
 import { R } from '@/deps.ts'
 import { filterStories } from '@/analysis.ts'
 import { SessionData } from '@/types.ts'
-import bot from '@/bot.ts'
 
 async function getUsersPreferences(): Promise<
   {
@@ -28,6 +27,9 @@ async function dailyAnalysis() {
   console.group('dailyAnalysis')
   const usersPreferences = await getUsersPreferences()
   console.debug('start', usersPreferences)
+
+  const botModule = await import('@/bot.ts')
+  const bot = botModule.default
 
   R.forEach<typeof usersPreferences[0]>(
     async ({ id, session: sessionJson }) => {
