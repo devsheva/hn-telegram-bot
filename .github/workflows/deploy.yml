@@ -5,12 +5,13 @@ on:
 
   pull_request:
     branches: master
+    types: [closed]
 
 jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-
+    
     env:
       APP_ENV: test
       BOT_TOKEN: dummy
