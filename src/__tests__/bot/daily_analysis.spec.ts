@@ -3,14 +3,24 @@ import {
   assertType,
   beforeAll,
   describe,
+  faker,
   IsExact,
   it,
+  returnsNext,
+  simpleFaker,
+  stub,
 } from '@/dev_deps.ts'
-import { cleanupDatabase, seedDatabase } from '@/utils/test_helpers.ts'
+import {
+  cleanupDatabase,
+  promisifyFactoryObj,
+  seedDatabase,
+} from '@/utils/test_helpers.ts'
 import dailyAnalysis, {
   getUsersPreferences,
 } from '@/preference/daily_analysis.ts'
-import { Preferences } from '@/types.ts'
+import { R } from '@/deps.ts'
+import * as F from '@/functions.ts'
+import { Item, TopStories } from '@/types.ts'
 
 beforeAll(async () => {
   await seedDatabase()
@@ -20,9 +30,77 @@ afterAll(async () => {
   await cleanupDatabase()
 })
 
+function mockFullSetup() {
+  // Mock the getTopStories function
+  const fakeTopStories = simpleFaker.helpers.multiple(
+    simpleFaker.number.int,
+    {
+      count: 3,
+    },
+  )
+
+  const fakeStoryTitles = [
+    'Watch out this new AWS Service: Deno on TypeScript',
+    'Deno vs Node: A Comprehensive Comparison',
+    'My journey to become a lazy developer',
+  ]
+
+  // Mock getItem function
+  const fakeItems: Item[] = F.mapIndexed(
+    (id, idx) => ({
+      id,
+      type: 'story',
+      by: faker.person.fullName(),
+      title: fakeStoryTitles[idx],
+      time: faker.date.recent().getTime(),
+    }),
+    fakeTopStories,
+  )
+
+  const fakeGeminiResponse = {
+    candidates: [
+      {
+        content: {
+          parts: [
+            {
+              text: R.pipe(
+                R.take(2),
+                R.map(R.toString),
+                R.assoc('storyIds', R.__, {}),
+                (v: any) => JSON.stringify(v),
+              )(fakeTopStories),
+            },
+          ],
+        },
+        safetyRatings: [],
+      },
+    ],
+  }
+
+  const fakeResponses = [
+    promisifyFactoryObj<TopStories>(fakeTopStories),
+    ...R.map(promisifyFactoryObj<Item>, fakeItems),
+    promisifyFactoryObj(fakeGeminiResponse),
+  ]
+
+  stub(
+    globalThis,
+    'fetch',
+    returnsNext(
+      fakeResponses,
+    ),
+  )
+}
+
 describe('dailyAnalysis', () => {
   it('should reply with filtered articles', async () => {
-    // dailyAnalysis()
+    mockFullSetup()
+    await dailyAnalysis()
+
+    // TODO: it should send a message to the user
+  })
+
+  it('should skip run if there are no users', async () => {
   })
 })
 
