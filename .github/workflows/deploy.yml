@@ -1,0 +1,120 @@
+name: Deploy
+on:
+  push:
+    branches: develop
+
+  pull_request:
+    branches: master
+    types: [closed]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    env:
+      APP_ENV: test
+      BOT_TOKEN: dummy
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+      SUPABASE_SCHEMA: test
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Cache Dependencies
+        run: deno cache src/bot.ts
+
+      - name: Run Tests
+        run: deno task test
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: test
+      BOT_TOKEN: dummy
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+      SUPABASE_SCHEMA: test
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Run Coverage
+        run: deno task coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+
+  format-and-lint:
+    name: Format and Lint
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: test
+      BOT_TOKEN: dummy
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+      SUPABASE_SCHEMA: test
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Run Format
+        run: deno fmt --check
+
+      - name: Run Lint
+        run: deno lint
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    needs:
+      - test
+      - format-and-lint
+    
+    environment:
+      name: ${{github.ref_name}}
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        env:
+          APP_ENV: ${{vars.APP_ENV}}
+        with:
+          project: "hn-telegram-bot"
+          entrypoint: "src/bot.ts"
+          root: "."
