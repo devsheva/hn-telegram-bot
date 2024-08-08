@@ -6,7 +6,10 @@ import { GeminiAdapter } from '@/ai_adapters/mod.ts'
 const baseInput: string = `
   Filter the following HackerNews stories by the provided preferences and return only the list of corresponding ids in an array format:
 `
-function generateInput(preferences: string[], titles: string[]): string {
+function generateInput(
+  preferences: string[],
+  titles: [number, string][],
+): string {
   return `
   ${baseInput}
   Preferences: ${preferences.join(', ')}
@@ -42,7 +45,7 @@ export async function filterStories(preferences: string[]): Promise<string[]> {
 
   const filteredTitles = R.pluck('title')(R.innerJoin(
     (item: NonNullable<Item>, id: number) => item.id === id,
-    items,
+    items as NonNullable<Item>[],
     filteredIds,
   ))
 

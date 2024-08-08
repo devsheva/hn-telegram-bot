@@ -36,14 +36,14 @@ describe('filterStories', () => {
     ]
 
     // Mock getItem function
-    const fakeItems = F.mapIndexed(
-      (id: number, idx: number) => ({
+    const fakeItems: Item[] = F.mapIndexed(
+      (id, idx: number) => ({
         id,
         type: 'story',
         by: faker.person.fullName(),
         title: fakeStoryTitles[idx],
         time: faker.date.recent().getTime(),
-      } as Item),
+      }),
       fakeTopStories,
     )
 

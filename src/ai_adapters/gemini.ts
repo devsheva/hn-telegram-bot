@@ -55,9 +55,13 @@ export class GeminiAdapter implements BaseAdapter {
               const parsedData = filteredContentSchema.parse(data)
 
               resolve(
-                R.path(
-                  ['candidates', 0, 'content', 'parts', 0],
-                )(parsedData),
+                R.path([
+                  'candidates',
+                  0,
+                  'content',
+                  'parts',
+                  0,
+                ])(parsedData) as ResponseContent,
               )
             })
           }
@@ -65,9 +69,6 @@ export class GeminiAdapter implements BaseAdapter {
     })
   }
 
-  /**
-   * Build the body for the Gemini API.
-   */
   public buildBody(input: string): RequestContent {
     if (R.isEmpty(input)) {
       throw new Error('Text is required')
