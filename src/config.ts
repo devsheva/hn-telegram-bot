@@ -16,10 +16,10 @@ const envSchema = z.object({
 })
 
 try {
-  const env = R.ifElse(
+  const env = await R.ifElse(
     R.propEq('test', 'true'),
     R.always({}),
-    async () => await load(),
+    () => load({ export: true }),
   )(parseArgs(Deno.args))
 
   if (R.isEmpty(env)) throw new Error('no env file found')
