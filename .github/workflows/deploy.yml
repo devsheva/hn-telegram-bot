@@ -16,6 +16,7 @@ jobs:
       BOT_TOKEN: dummy
       SUPABASE_URL: ${{secrets.SUPABASE_URL}}
       SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+      SUPABASE_SCHEMA: test
 
     steps:
       - name: Setup repo
@@ -38,6 +39,9 @@ jobs:
     env:
       APP_ENV: test
       BOT_TOKEN: dummy
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+      SUPABASE_SCHEMA: test
 
     steps:
       - name: Setup repo
@@ -63,6 +67,9 @@ jobs:
     env:
       APP_ENV: test
       BOT_TOKEN: dummy
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+      SUPABASE_SCHEMA: test
 
     steps:
       - name: Setup repo
