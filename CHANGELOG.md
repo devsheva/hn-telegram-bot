@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
+- *(analysis)* Send message to user
+- Add daily analysis cron job
 - *(supabase)* Add test schema support
 - Add supabase as storage for preferences
 - *(analysis)* Respond with filtered story titles based on user preferences
@@ -28,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Bug Fixes
 
+- *(utils)* Type generic supabaseAdapter
 - Correctly type users preferences group
 - *(config)* Restore test task arg when setting env
 - Add missing test variables for coverage
@@ -43,12 +46,14 @@ All notable changes to this project will be documented in this file.
 
 ### 🚜 Refactor
 
+- *(gemini-adapter)* Simplify body object gen
 - Improve env loading with zod
 - [**breaking**] Move types in a single declaration file
 - Add generic slashCommand generator
 
 ### 📚 Documentation
 
+- Update changelog
 - Add instructions to run tests with test schema
 - Force env variable setup
 - Removed setMyCommands tip since an issue has been opened for it(#13)
@@ -90,6 +95,13 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Update config.ts to load environment variables with export option
+- *(analysis)* Parse user preferences and filter their stories
+- Correctly type all parts using ramda
+- Add deno check task to improve code quality
+- *(types)* Type getUserPreferences
+- *(ramda)* Add @types/ramda
+- Remove any type from custom schemas in utils.ts
 - Upgrade @std/testing to major 1
 - Fix supabase deps
 - Upgrade deno to 1.45.4 and include unstable cron
