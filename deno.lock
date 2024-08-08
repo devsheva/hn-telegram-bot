@@ -10,6 +10,7 @@
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.1",
       "jsr:@std/internal@^1.0.1": "jsr:@std/internal@1.0.1",
       "jsr:@std/testing@^1.0.0": "jsr:@std/testing@1.0.0",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@types/ramda": "npm:@types/ramda@0.30.1"
     },
     "jsr": {
@@ -47,6 +48,10 @@
       }
     },
     "npm": {
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
       "@types/ramda@0.30.1": {
         "integrity": "sha512-aoyF/ADPL6N+/NXXfhPWF+Qj6w1Cql59m9wX0Gi15uyF+bpzXeLd63HPdiTDE2bmLXfNcVufsDPKmbfOrOzTBA==",
         "dependencies": {
