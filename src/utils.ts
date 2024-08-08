@@ -13,6 +13,7 @@ export const connection = createClient<Database>(
   config.SUPABASE_KEY,
   {
     db: {
+      // deno-lint-ignore no-explicit-any
       schema: config.SUPABASE_SCHEMA as any, // FIXME: remove any when found a way to type custom schemas (#20)
     },
   },
