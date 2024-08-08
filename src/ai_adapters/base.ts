@@ -17,5 +17,9 @@ export enum HttpStatus {
 
 export interface BaseAdapter {
   generateContent(input: string): Promise<ResponseContent>
+
+  /**
+   * Build the body for the Gemini API.
+   */
   buildBody(input: string): object
 }

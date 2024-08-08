@@ -72,21 +72,21 @@ export class GeminiAdapter implements BaseAdapter {
     if (R.isEmpty(input)) {
       throw new Error('Text is required')
     }
-
-    const body: RequestContent = R.pipe(
-      R.assocPath(
-        ['contents', 0, 'parts', 0, 'text'],
-        input,
-      ),
-      R.assocPath(
-        ['generationConfig', 'responseMimeType'],
-        'application/json',
-      ),
-      R.assocPath(
-        ['generationConfig', 'responseSchema'],
-        responseSchema,
-      ),
-    )({})
+    const body: RequestContent = {
+      contents: [
+        {
+          parts: [
+            {
+              text: input,
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        responseMimeType: 'application/json',
+        responseSchema: responseSchema,
+      },
+    }
 
     return body
   }
