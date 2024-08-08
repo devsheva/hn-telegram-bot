@@ -2,6 +2,7 @@ import { connection } from '@/utils.ts'
 import { R } from '@/deps.ts'
 import { filterStories } from '@/analysis.ts'
 import { SessionData } from '@/types.ts'
+import bot from '@/bot.ts'
 
 async function getUsersPreferences(): Promise<
   {
@@ -40,7 +41,7 @@ async function dailyAnalysis() {
       console.debug('preferences', preferences)
       const filteredStories = await filterStories(preferences)
       console.debug('filteredStories', filteredStories)
-      // TODO: send message to bot user
+      bot.api.sendMessage(id, filteredStories.join('\n'))
     },
   )(usersPreferences)
 

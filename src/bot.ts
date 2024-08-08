@@ -28,6 +28,8 @@ bot.start()
 
 Deno.cron('daily analysis', '0 1 * * *', async () => {
   console.info('Running daily analysis')
-  // await dailyAnalysis()
+  await dailyAnalysis()
   console.info('Daily analysis completed')
 })
+
+export default bot

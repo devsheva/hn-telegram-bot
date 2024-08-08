@@ -11,6 +11,7 @@ import {
   stub,
 } from '@/dev_deps.ts'
 import {
+  botInfo,
   cleanupDatabase,
   promisifyFactoryObj,
   seedDatabase,
@@ -98,6 +99,7 @@ describe('dailyAnalysis', () => {
     await dailyAnalysis()
 
     // TODO: it should send a message to the user
+    // TODO: find a way to test bot sending message
   })
 
   it('should skip run if there are no users', async () => {
