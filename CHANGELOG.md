@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.0.0-alpha.1] - 2024-08-08
 
 ### 🚀 Features
 
@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Bug Fixes
 
+- Ignore any type lint error
 - *(utils)* Type generic supabaseAdapter
 - Correctly type users preferences group
 - *(config)* Restore test task arg when setting env
@@ -46,6 +47,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚜 Refactor
 
+- *(analysis)* Import bot dynamically
 - *(gemini-adapter)* Simplify body object gen
 - Improve env loading with zod
 - [**breaking**] Move types in a single declaration file
@@ -53,6 +55,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
+- Update changelog
 - Update changelog
 - Add instructions to run tests with test schema
 - Force env variable setup
@@ -73,6 +76,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🧪 Testing
 
+- Disable any lint
 - *(helpers)* Cleanup database sessions
 - *(analysis)* Add promisify factory with item mocks
 - Stub global fetch
@@ -95,6 +99,12 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Add closed pull request trigger to deploy workflow
+- Remove dependabot 
+- Add dependabot
+- Skip dailyAnalysis  in test suite
+- Update deno test command to remove watch flag
+- Update deploy dev actions with supabase variables
 - Update config.ts to load environment variables with export option
 - *(analysis)* Parse user preferences and filter their stories
 - Correctly type all parts using ramda
