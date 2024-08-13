@@ -39,3 +39,4 @@ Deno.cron('daily analysis', '0 1 * * *', async () => {
 const app = new Application()
 
 app.use(webhookCallback(bot, 'oak'))
+app.listen({ port: 8080 })
