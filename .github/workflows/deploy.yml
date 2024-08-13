@@ -116,5 +116,5 @@ jobs:
           APP_ENV: ${{vars.APP_ENV}}
         with:
           project: "hn-telegram-bot"
-          entrypoint: "src/bot.ts"
+          entrypoint: "src/webhook.ts"
           root: "."
