@@ -189,3 +189,82 @@ describe('list', () => {
     assertEquals(payload.text, 'No preferences set.')
   })
 })
+
+describe('add_preference', () => {
+  it('adds a new preference', async () => {
+    const outgoingRequests = await testSetupConversation(
+      storageAdapterFn,
+      [
+        {
+          update_id: 1,
+          message: {
+            message_id: 1,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'test_preference',
+          },
+        },
+        {
+          update_id: 2,
+          message: {
+            message_id: 2,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'some_other_preference',
+          },
+        },
+      ],
+      [
+        slashCommand('add_preference', ['again_other_preference']),
+        slashCommand('list'),
+      ],
+      setup,
+    )
+    const listRequest = R.last(outgoingRequests)
+
+    const payload = R.prop('payload', listRequest!)
+    assertEquals(
+      payload.text,
+      'test_preference\nsome_other_preference\nagain_other_preference',
+    )
+  })
+
+  it('does not add a duplicate preference', async () => {
+    const outgoingRequests = await testSetupConversation(
+      storageAdapterFn,
+      [
+        {
+          update_id: 1,
+          message: {
+            message_id: 1,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'test_preference',
+          },
+        },
+        {
+          update_id: 2,
+          message: {
+            message_id: 2,
+            date: Date.now(),
+            chat,
+            from,
+            text: 'some_other_preference',
+          },
+        },
+      ],
+      [
+        slashCommand('add_preference', ['test_preference']),
+        slashCommand('list'),
+      ],
+      setup,
+    )
+    const listRequest = R.last(outgoingRequests)
+
+    const payload = R.prop('payload', listRequest!)
+    assertEquals(payload.text, 'test_preference\nsome_other_preference')
+  })
+})

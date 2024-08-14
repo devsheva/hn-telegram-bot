@@ -46,6 +46,15 @@ composer.command('list', async (ctx) =>
       R.join('\n'),
     )(ctx.session.preferences),
   ))
+
+composer.command('add_preference', async (ctx) => {
+  const preference = ctx.match
+  const currentPreferences = new Set(ctx.session.preferences)
+  currentPreferences.add(preference)
+  ctx.session.preferences = Array.from(currentPreferences)
+  await ctx.reply('Preference added.')
+})
+
 composer.on('message', async (ctx) => {
   await ctx.reply('Please use the /setup command to setup your preferences.')
 })

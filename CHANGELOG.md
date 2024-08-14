@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.0.0-alpha.1] - 2024-08-14
 
 ### 🚀 Features
 
+- Add preference to bot setup
 - Add webhook endpoint for bot integration with Oak framework
 - *(analysis)* Send message to user
 - Add daily analysis cron job
@@ -59,6 +60,7 @@ All notable changes to this project will be documented in this file.
 
 - Update changelog
 - Update changelog
+- Update changelog
 - Add instructions to run tests with test schema
 - Force env variable setup
 - Removed setMyCommands tip since an issue has been opened for it(#13)
@@ -101,6 +103,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Add webhook listener to Oak app
 - Update entrypoint to "src/webhook.ts" for deploying hn-telegram-bot
 - Update deno version to 1.45.5
 - Add closed pull request trigger to deploy workflow
