@@ -48,16 +48,24 @@ export const from: User = {
   is_bot: false,
 }
 
-type AvailableCommands = 'setup' | 'reset' | 'list' | 'cancel'
+type AvailableCommands =
+  | 'setup'
+  | 'reset'
+  | 'list'
+  | 'add_preference'
+  | 'cancel'
 
-export const slashCommand = (command: AvailableCommands): Update => ({
+export const slashCommand = (
+  command: AvailableCommands,
+  args: string[] = [],
+): Update => ({
   update_id: 1,
   message: {
     message_id: 1,
     date: faker.date.anytime().getTime(),
     chat,
     from,
-    text: R.concat('/', command),
+    text: R.concat(R.concat('/', command), R.join(' ', args)),
     entities: [
       { type: 'bot_command', offset: 0, length: R.inc(command.length) },
     ],
