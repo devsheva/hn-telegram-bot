@@ -55,29 +55,31 @@ type AvailableCommands =
   | 'add_preference'
   | 'cancel'
 
-export const slashCommand = (
+export function slashCommand(
   command: AvailableCommands,
   args: string[] = [],
-): Update => ({
-  update_id: 1,
-  message: {
-    message_id: 1,
-    date: faker.date.anytime().getTime(),
-    chat,
-    from,
-    text: R.concat(R.concat('/', command), R.join(' ', args)),
-    entities: [
-      { type: 'bot_command', offset: 0, length: R.inc(command.length) },
-    ],
-  },
-})
+): Update {
+  return {
+    update_id: 1,
+    message: {
+      message_id: 1,
+      date: faker.date.anytime().getTime(),
+      chat,
+      from,
+      text: R.concat(R.concat('/', command), R.join(' ', args)),
+      entities: [
+        { type: 'bot_command', offset: 0, length: R.inc(command.length) },
+      ],
+    },
+  }
+}
 
-export const testSetupConversation = async (
+export async function testSetupConversation(
   storageAdapter: () => MemorySessionStorage<SessionData>,
   update: Update | Update[] = [],
   afterCancel: Update | Update[] = [],
   mw: Middleware<PreferencesContext> = new Composer(),
-) => {
+) {
   const updates = Array.isArray(update) ? update : [update]
   const afterCancelUpdates = Array.isArray(afterCancel)
     ? afterCancel
