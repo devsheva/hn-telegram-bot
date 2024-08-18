@@ -1,7 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:best-practices"],
-    "schedule": ["after 10pm and before 5am every weekday", "every weekend"],
+    "extends": ["config:best-practices", "schedule:daily"],
     "major": {
         "dependencyDashboardApproval": true
     }
