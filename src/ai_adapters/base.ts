@@ -15,11 +15,11 @@ export enum HttpStatus {
   INTERNAL_SERVER_ERROR = 500,
 }
 
-export interface BaseAdapter {
-  generateContent(input: string): Promise<ResponseContent>
+export abstract class BaseAdapter {
+  protected abstract _apiKey: string
+  protected abstract _baseUrl: string
+  protected abstract _model: string
 
-  /**
-   * Build the body for the Gemini API.
-   */
-  buildBody(input: string): object
+  abstract generateContent(input: string): Promise<ResponseContent>
+  abstract buildBody(input: string): object
 }

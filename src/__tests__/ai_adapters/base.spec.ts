@@ -4,7 +4,18 @@ import { BaseAdapter, ResponseContent } from '../../ai_adapters/base.ts'
 describe('baseAdapter', () => {
   describe('constructor', () => {
     it('correctly gets implemented', () => {
-      class MyAdapter implements BaseAdapter {
+      class MyAdapter extends BaseAdapter {
+        protected _apiKey: string
+        protected _baseUrl: string
+        protected _model: string
+
+        constructor() {
+          super()
+          this._apiKey = '123'
+          this._baseUrl = 'http://localhost'
+          this._model = 'gpt-3'
+        }
+
         generateContent(_input: string): Promise<ResponseContent> {
           return Promise.resolve({ text: 'Hello World!' })
         }
@@ -15,7 +26,6 @@ describe('baseAdapter', () => {
       }
 
       const adapter = new MyAdapter()
-      assertType<IsExact<typeof adapter, BaseAdapter>>(true)
       assertType<
         IsExact<
           typeof adapter.generateContent,
