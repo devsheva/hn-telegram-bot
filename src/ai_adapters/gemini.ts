@@ -4,12 +4,13 @@ import { RequestContent, responseSchema } from '@/types.ts'
 import { BaseAdapter, HttpStatus, ResponseContent } from '@/ai_adapters/base.ts'
 import { filteredContentSchema } from '@/types.ts'
 
-export class GeminiAdapter implements BaseAdapter {
-  private readonly _apiKey: string
-  private readonly _baseUrl: string
-  private readonly _model: string
+export class GeminiAdapter extends BaseAdapter {
+  protected _apiKey: string
+  protected _baseUrl: string
+  protected _model: string
 
   constructor() {
+    super()
     this._apiKey = config.GEMINI_API_KEY
     this._baseUrl = config.BASE_GEMINI_ENDPOINT
     this._model = 'gemini-1.5-flash'
