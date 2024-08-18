@@ -1,15 +1,8 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:best-practices", "schedule:daily"],
-    "baseBranches": ["$default", "develop"],
-    "major": {
-        "dependencyDashboardApproval": true
-    },
-    "customManagers": [
-        {
-            "datasourceTemplate": "deno",
-            "customType": "regex",
-            "fileMatch": ["deno\\.jsonc?"]
-        }
-    ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", "schedule:daily", "local>devsheva/hn-telegram-bot/.github/deno/jsr"],
+  "baseBranches": ["$default", "develop"],
+  "major": {
+    "dependencyDashboardApproval": true
+  }
 }
