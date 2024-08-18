@@ -3,5 +3,10 @@
     "extends": ["config:best-practices", "schedule:daily"],
     "major": {
         "dependencyDashboardApproval": true
-    }
+    },
+    "packageRules": [
+        {
+            "matchDatasources": ["deno"]
+        }
+    ]
 }
