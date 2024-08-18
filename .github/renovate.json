@@ -1,3 +1,5 @@
 {
-    "dependencyDashboard": true
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "dependencyDashboard": true,
+    "schedule": ["after 10pm and before 5am every weekday", "every weekend"]
 }
