@@ -7,11 +7,6 @@ import dailyAnalysis from '@/preference/daily_analysis.ts'
 
 const bot = new Bot<PreferencesContext>(config.BOT_TOKEN)
 
-bot.command(
-  'help',
-  (ctx) =>
-    ctx.reply('Bot is under construction. Please wait for the next update.'),
-)
 bot.use(
   session({
     initial: (): SessionData => ({ preferences: [] }),
