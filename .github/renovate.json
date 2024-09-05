@@ -3,12 +3,5 @@
     "extends": ["config:best-practices", "schedule:daily"],
     "major": {
         "dependencyDashboardApproval": true
-    },
-    "customManagers": [
-        {
-            "datasourceTemplate": "deno",
-            "customType": "regex",
-            "fileMatch": ["deno\\.jsonc?"]
-        }
-    ]
+    }
 }
