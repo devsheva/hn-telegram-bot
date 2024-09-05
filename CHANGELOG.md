@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0-alpha.1] - 2024-08-14
+## [1.0.0-alpha.1] - 2024-09-05
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove useless help command
+- *(renovate)* Remove deno custom manager as not working
+- Add custom manager for deno package in renovate.json
+- Add deno package rule to renovate.json
+- Update renovate.json to enable daily scheduling
+- Update renovate.json to extend best-practices config
+- Enable dependency dashboard approval for major updates
+
+## [1.0.0-alpha] - 2024-08-08
 
 ### 🚀 Features
 
@@ -49,6 +61,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🚜 Refactor
 
+- Update baseAdapter to use abstract class instead of interface
+- Update test_helpers.ts to use arrow function syntax
 - Remove webhook task from deno.jsonc
 - *(analysis)* Import bot dynamically
 - *(gemini-adapter)* Simplify body object gen
@@ -58,16 +72,12 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Update changelog
-- Update changelog
-- Update changelog
 - Add instructions to run tests with test schema
 - Force env variable setup
 - Removed setMyCommands tip since an issue has been opened for it(#13)
 - Fix typo on README
 - Sort commits by newest for git-cliff
 - Prioritize testing over styling in changelog
-- Update changelog
 - Add deployment section
 - Move codefactor badge on top
 - Add codefactor badge
@@ -103,6 +113,11 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Schedule renovate
+- Enable dependency dashboard in renovate.json
+- Init renovate.json
+- Remove update workflow
+- Skip changelog commits for git-cliff
 - Add webhook listener to Oak app
 - Update entrypoint to "src/webhook.ts" for deploying hn-telegram-bot
 - Update deno version to 1.45.5
