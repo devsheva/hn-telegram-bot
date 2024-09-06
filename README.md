@@ -38,6 +38,13 @@ deno leaks due to sanitizers.
 
 This project is made by mainly following BDD principles, so you should stick to it, you won't regret.
 
+## Release
+
+1. Open a Pull Request on `master` branch.
+2. Tag version from local then push (adheres to `semver`)
+3. Bump changelog with `git-cliff --bump`
+4. Wait approval of PR, in case of merge it will be officially released.
+
 ## Deployment
 
 It's handled with GitHub Actions, with two [workflows](.github/workflows/):
