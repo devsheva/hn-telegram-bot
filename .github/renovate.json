@@ -1,7 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices", "schedule:daily", "github>devsheva/hn-telegram-bot//.github/deno/jsr"],
-  "baseBranches": ["$default", "develop"],
+  "extends": [
+    "config:best-practices",
+    "schedule:daily",
+    "github>devsheva/hn-telegram-bot//.github/deno/jsr"
+  ],
+  "baseBranchPatterns": [
+    "$default",
+    "develop"
+  ],
   "major": {
     "dependencyDashboardApproval": true
   }
